@@ -793,7 +793,6 @@ tbody tr { transition: background 0.12s; }
 
     <div class="nav-group">
       <div class="nav-group-label">Knowledge Base</div>
-      <a class="nav-link" onclick="goto('rag-docs')">What Docs LISA Needs</a>
       <a class="nav-link" onclick="goto('doc-format')">How to Write Docs</a>
       <a class="nav-link" onclick="goto('rag-checklist')">RAG Doc Checklist</a>
     </div>
@@ -1850,57 +1849,6 @@ Format as bullet points with clear headers.</pre>
 
 <div class="divider"></div>
 
-<!-- ════════════════════════════════════════════
-     RAG DOCS
-════════════════════════════════════════════ -->
-<div id="rag-docs" class="anchor">
-  <div class="section-header">
-    <div class="eyebrow">Knowledge Base</div>
-    <h2><span class="ico">&#128196;</span> What Documents LISA Needs</h2>
-    <p>LISA's quality is 100% dependent on what's in <code>data/</code>. If a document doesn't exist, LISA cannot answer that question. This is the master checklist.</p>
-  </div>
-
-  <div class="highlight">&#128161; <strong>Rule:</strong> If it's not in <code>data/</code>, LISA will say "I don't have that information." Better documents = better LISA. Every missing doc is a gap in LISA's knowledge.</div>
-
-  <h3>Product Documents</h3>
-  <ul class="checklist">
-    <li><span class="ch-ok">&#10003;</span><div><strong>AI_B2C_RAG_Optimized.txt</strong>: LAMF/LAS product FAQ: rates, LTV, eligibility, process, fees, prepayment. <span class="pill pg">Exists</span></div></li>
-    <li><span class="ch-ok">&#10003;</span><div><strong>Lark_Finserv_Company_Information.txt</strong>: Company overview, mission, product line, team. <span class="pill pg">Exists</span></div></li>
-    <li><span class="ch-ok">&#10003;</span><div><strong>Promotion Material.txt</strong>: WhatsApp templates, pitch scripts, MFD marketing content. <span class="pill pg">Exists</span></div></li>
-    <li><span class="ch-miss">&#9679;</span><div><strong>Lark_Edge_Product_Sheet.txt</strong>: Feature list, setup guide, MFD use cases, pricing, go-live steps. <span class="pill po">Missing: add to data/</span></div></li>
-    <li><span class="ch-miss">&#9679;</span><div><strong>Lark_Vault_Product_Sheet.txt</strong>: White-label platform features, config options, onboarding. <span class="pill po">Missing</span></div></li>
-    <li><span class="ch-miss">&#9679;</span><div><strong>Lark_OS_Enterprise_Guide.txt</strong>: Enterprise LAS infrastructure, on-premise setup, SLAs. <span class="pill po">Missing</span></div></li>
-    <li><span class="ch-miss">&#9679;</span><div><strong>Lark_Grid_API_Overview.txt</strong>: SDK capabilities, REST endpoints, webhook events. <span class="pill po">Missing</span></div></li>
-  </ul>
-
-  <h3>Lender Documents</h3>
-  <ul class="checklist">
-    <li><span class="ch-ok">&#10003;</span><div><strong>ABFL Tata Offline LAS.txt</strong>: Phygital process for ABFL and Tata Capital, required docs, TAT. <span class="pill pg">Exists</span></div></li>
-    <li><span class="ch-miss">&#9679;</span><div><strong>BFL_Product_Sheet.txt</strong>: Bajaj Finance LAMF rates, LTV, digital process, contacts. <span class="pill po">Missing: high priority</span></div></li>
-    <li><span class="ch-miss">&#9679;</span><div><strong>DSP_Lender_Guide.txt</strong>: DSP Blackrock LAS terms, eligible funds, rates, lien process. <span class="pill po">Missing: high priority</span></div></li>
-    <li><span class="ch-miss">&#9679;</span><div><strong>Mirae_Asset_LAS.txt</strong>: Mirae rates, CAMS process, eligible fund list. <span class="pill po">Missing</span></div></li>
-    <li><span class="ch-miss">&#9679;</span><div><strong>Lender_Comparison_Matrix.txt</strong>: Side-by-side: rate, LTV, process, TAT, min amount. <span class="pill po">Missing: very high value</span></div></li>
-  </ul>
-
-  <h3>Operations Documents</h3>
-  <ul class="checklist">
-    <li><span class="ch-ok">&#10003;</span><div><strong>Lark_Finserv_RAG_Notes.txt</strong>: Internal operations notes and additional context. <span class="pill pg">Exists</span></div></li>
-    <li><span class="ch-miss">&#9679;</span><div><strong>Loan_Journey_Detailed.txt</strong>: Step-by-step from eligibility check to disbursement. Timings at each step. <span class="pill po">Missing</span></div></li>
-    <li><span class="ch-miss">&#9679;</span><div><strong>Partner_Payout_Guide.txt</strong>: Upfront payout %, trail income, processing fee share by lender. <span class="pill po">Missing</span></div></li>
-    <li><span class="ch-miss">&#9679;</span><div><strong>Grievance_SOP.txt</strong>: Issue types, escalation path, resolution SLAs, contacts. <span class="pill po">Missing</span></div></li>
-    <li><span class="ch-miss">&#9679;</span><div><strong>Margin_Call_Process.txt</strong>: When triggered, top-up options, repayment, lender-specific rules. <span class="pill po">Missing</span></div></li>
-    <li><span class="ch-miss">&#9679;</span><div><strong>Partner_Onboarding_Checklist.txt</strong>: Steps to onboard a new MFD/wealth platform partner. <span class="pill po">Missing</span></div></li>
-  </ul>
-
-  <h3>Training Data</h3>
-  <ul class="checklist">
-    <li><span class="ch-ok">&#10003;</span><div><strong>Complete_Training_Dataset_Labeled.csv</strong>: 503 labeled Q&amp;A pairs covering most common MFD questions. <span class="pill pg">Exists</span></div></li>
-    <li><span class="ch-miss">&#9679;</span><div><strong>FAQ_Extended.txt</strong>: Expand to 1000+ Q&amp;A pairs. Add lender-specific, payout, grievance questions. <span class="pill po">Expand</span></div></li>
-  </ul>
-</div>
-
-<div class="divider"></div>
-
 <!-- DOC FORMAT -->
 <div id="doc-format" class="anchor">
   <div class="section-header">
@@ -1991,6 +1939,16 @@ KYC: Must be Aadhaar/PAN linked.</pre>
     </div>
   </div>
 
+
+  <!-- Progress bar -->
+  <div style="margin:0 0 8px;">
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px;">
+      <span style="font-size:13px;font-weight:600;color:#0D0D2B;">Document Completion Progress</span>
+      <span id="progress-label" style="font-size:13px;font-weight:700;color:#0050CC;">0 / 45 Done</span>
+    </div>
+    <div class="progress-bar-wrap"><div class="progress-bar-fill" id="progress-fill" style="width:0%"></div></div>
+  </div>
+
   <!-- Shared table styles -->
   <style>
   .rag-table { width:100%; border-collapse:collapse; border-radius:12px; overflow:hidden; box-shadow:0 2px 16px rgba(0,0,0,0.07); margin-bottom:32px; }
@@ -2018,137 +1976,419 @@ KYC: Must be Aadhaar/PAN linked.</pre>
   .prow-p1 td { background:#FEF2F2 !important; }
   .prow-p2 td { background:#FFFBEB !important; }
   .prow-p3 td { background:#EFF6FF !important; }
+
+  .cb-wrap { display:inline-flex; align-items:center; cursor:pointer; }
+  .cb-wrap input { display:none; }
+  .cb-box {
+    width:22px; height:22px; border:2px solid #CBD5E0; border-radius:6px;
+    display:flex; align-items:center; justify-content:center;
+    transition:all 0.2s; background:#fff;
+  }
+  .cb-wrap input:checked + .cb-box {
+    background:linear-gradient(135deg,#059669,#10B981);
+    border-color:#059669;
+  }
+  .cb-wrap input:checked + .cb-box::after {
+    content:'✓'; color:#fff; font-size:13px; font-weight:800;
+  }
+  .rag-table tbody tr.row-done td { opacity:0.5; }
+  .rag-table tbody tr.row-done td:first-child { text-decoration:line-through; color:#9CA3AF; }
+  .progress-bar-wrap { background:#E8EEFF; border-radius:20px; height:10px; margin:16px 0 6px; overflow:hidden; }
+  .progress-bar-fill { height:10px; background:linear-gradient(90deg,#0050CC,#5B21B6); border-radius:20px; transition:width 0.4s ease; }
+  .progress-label { font-size:12px; color:#6B7A99; margin-bottom:20px; }
+  .progress-label strong { color:#0050CC; }
+
   </style>
 
   <!-- SECTION 1 -->
   <div class="rag-section-title"><div class="rag-sec-num">1</div><div class="rag-sec-label">Company &amp; Platform <span>4 documents</span></div></div>
   <table class="rag-table">
-    <thead><tr><th>Document Name</th><th>What It Must Cover</th><th>Owner</th><th>Status</th></tr></thead>
+    <thead><tr><th>Document Name</th><th>What It Must Cover</th><th>Owner</th><th style="text-align:center;width:60px;">Done?</th></tr></thead>
     <tbody>
-      <tr><td>Lark Finserv Company Overview</td><td>Founded July 2023, mission, what Lark is (LSP + TSP, not a lender), milestones, leadership, 50+ partners, ₹300 Cr AUM, RBI compliance</td><td>Marketing</td><td><span class="rbadge rbadge-pending">Pending</span></td></tr>
-      <tr><td>What Lark Does vs What Lenders Do</td><td>Clear boundary — Lark = infrastructure + coordination, Lender = credit + disbursal. Responsibility matrix per stage.</td><td>Ops Manager</td><td><span class="rbadge rbadge-pending">Pending</span></td></tr>
-      <tr><td>Business Models Guide</td><td>SaaS Model, Revenue Share Model, B2C Direct Lending — how each works, who pays what, commercial terms overview</td><td>Business Team</td><td><span class="rbadge rbadge-pending">Pending</span></td></tr>
-      <tr><td>Regulatory Compliance Overview</td><td>RBI DLG September 2022, KYC/AML, DPDP Act 2023, SEBI, IT Act — what each means for Lark operations</td><td>Compliance</td><td><span class="rbadge rbadge-pending">Pending</span></td></tr>
+      <tr><td>Lark Finserv Company Overview</td><td>Founded July 2023, mission, what Lark is (LSP + TSP, not a lender), milestones, leadership, 50+ partners, ₹300 Cr AUM, RBI compliance</td><td>Marketing</td><td style="text-align:center;width:60px;">
+        <label class="cb-wrap" title="Mark as done">
+          <input type="checkbox" class="doc-cb" id="doc_1" onchange="toggleDoc(this)">
+          <span class="cb-box"></span>
+        </label>
+      </td></tr>
+      <tr><td>What Lark Does vs What Lenders Do</td><td>Clear boundary — Lark = infrastructure + coordination, Lender = credit + disbursal. Responsibility matrix per stage.</td><td>Ops Manager</td><td style="text-align:center;width:60px;">
+        <label class="cb-wrap" title="Mark as done">
+          <input type="checkbox" class="doc-cb" id="doc_2" onchange="toggleDoc(this)">
+          <span class="cb-box"></span>
+        </label>
+      </td></tr>
+      <tr><td>Business Models Guide</td><td>SaaS Model, Revenue Share Model, B2C Direct Lending — how each works, who pays what, commercial terms overview</td><td>Business Team</td><td style="text-align:center;width:60px;">
+        <label class="cb-wrap" title="Mark as done">
+          <input type="checkbox" class="doc-cb" id="doc_3" onchange="toggleDoc(this)">
+          <span class="cb-box"></span>
+        </label>
+      </td></tr>
+      <tr><td>Regulatory Compliance Overview</td><td>RBI DLG September 2022, KYC/AML, DPDP Act 2023, SEBI, IT Act — what each means for Lark operations</td><td>Compliance</td><td style="text-align:center;width:60px;">
+        <label class="cb-wrap" title="Mark as done">
+          <input type="checkbox" class="doc-cb" id="doc_4" onchange="toggleDoc(this)">
+          <span class="cb-box"></span>
+        </label>
+      </td></tr>
     </tbody>
   </table>
 
   <!-- SECTION 2 -->
   <div class="rag-section-title"><div class="rag-sec-num">2</div><div class="rag-sec-label">Products <span>5 documents</span></div></div>
   <table class="rag-table">
-    <thead><tr><th>Document Name</th><th>What It Must Cover</th><th>Owner</th><th>Status</th></tr></thead>
+    <thead><tr><th>Document Name</th><th>What It Must Cover</th><th>Owner</th><th style="text-align:center;width:60px;">Done?</th></tr></thead>
     <tbody>
-      <tr><td>Lark Edge Product Guide</td><td>For MFDs &amp; IFAs. Zero integration, live in 10 min, ₹2,500/month. Loan tracking, eligibility checker, multiple lenders, marketing creatives, built-in simulator</td><td>Product</td><td><span class="rbadge rbadge-pending">Pending</span></td></tr>
-      <tr><td>Lark Vault Product Guide</td><td>For Wealth Platforms. White-labeled portal, live in 1 hr, ₹12,500/month. Admin console, permissioned access, CAS API, team management, branded UI, 99.9% SLA</td><td>Product</td><td><span class="rbadge rbadge-pending">Pending</span></td></tr>
-      <tr><td>Lark Grid Product Guide</td><td>For Developers/WealthTech. SDK + API stack, live in 24 hrs, ₹25,000/month. Web + mobile SDKs, webhooks, custom workflows, hosted portal, event-driven architecture</td><td>Product</td><td><span class="rbadge rbadge-pending">Pending</span></td></tr>
-      <tr><td>Lark OS Product Guide</td><td>For Enterprises. On-premise/hybrid, custom pricing, 99.99% SLA, 24/7 support, custom module development, dedicated engineering team</td><td>Product</td><td><span class="rbadge rbadge-pending">Pending</span></td></tr>
-      <tr><td>Product Comparison &amp; Pricing Table</td><td>Edge vs Vault vs Grid vs OS — features, monthly price, go-live time, support SLA, loan cap, analytics level, free trial (30 days), suspension policy, GST terms</td><td>Business Team</td><td><span class="rbadge rbadge-pending">Pending</span></td></tr>
+      <tr><td>Lark Edge Product Guide</td><td>For MFDs &amp; IFAs. Zero integration, live in 10 min, ₹2,500/month. Loan tracking, eligibility checker, multiple lenders, marketing creatives, built-in simulator</td><td>Product</td><td style="text-align:center;width:60px;">
+        <label class="cb-wrap" title="Mark as done">
+          <input type="checkbox" class="doc-cb" id="doc_5" onchange="toggleDoc(this)">
+          <span class="cb-box"></span>
+        </label>
+      </td></tr>
+      <tr><td>Lark Vault Product Guide</td><td>For Wealth Platforms. White-labeled portal, live in 1 hr, ₹12,500/month. Admin console, permissioned access, CAS API, team management, branded UI, 99.9% SLA</td><td>Product</td><td style="text-align:center;width:60px;">
+        <label class="cb-wrap" title="Mark as done">
+          <input type="checkbox" class="doc-cb" id="doc_6" onchange="toggleDoc(this)">
+          <span class="cb-box"></span>
+        </label>
+      </td></tr>
+      <tr><td>Lark Grid Product Guide</td><td>For Developers/WealthTech. SDK + API stack, live in 24 hrs, ₹25,000/month. Web + mobile SDKs, webhooks, custom workflows, hosted portal, event-driven architecture</td><td>Product</td><td style="text-align:center;width:60px;">
+        <label class="cb-wrap" title="Mark as done">
+          <input type="checkbox" class="doc-cb" id="doc_7" onchange="toggleDoc(this)">
+          <span class="cb-box"></span>
+        </label>
+      </td></tr>
+      <tr><td>Lark OS Product Guide</td><td>For Enterprises. On-premise/hybrid, custom pricing, 99.99% SLA, 24/7 support, custom module development, dedicated engineering team</td><td>Product</td><td style="text-align:center;width:60px;">
+        <label class="cb-wrap" title="Mark as done">
+          <input type="checkbox" class="doc-cb" id="doc_8" onchange="toggleDoc(this)">
+          <span class="cb-box"></span>
+        </label>
+      </td></tr>
+      <tr><td>Product Comparison &amp; Pricing Table</td><td>Edge vs Vault vs Grid vs OS — features, monthly price, go-live time, support SLA, loan cap, analytics level, free trial (30 days), suspension policy, GST terms</td><td>Business Team</td><td style="text-align:center;width:60px;">
+        <label class="cb-wrap" title="Mark as done">
+          <input type="checkbox" class="doc-cb" id="doc_9" onchange="toggleDoc(this)">
+          <span class="cb-box"></span>
+        </label>
+      </td></tr>
     </tbody>
   </table>
 
   <!-- SECTION 3 -->
   <div class="rag-section-title"><div class="rag-sec-num">3</div><div class="rag-sec-label">How the Technology Works <span>7 documents</span></div></div>
   <table class="rag-table">
-    <thead><tr><th>Document Name</th><th>What It Must Cover</th><th>Owner</th><th>Status</th></tr></thead>
+    <thead><tr><th>Document Name</th><th>What It Must Cover</th><th>Owner</th><th style="text-align:center;width:60px;">Done?</th></tr></thead>
     <tbody>
-      <tr><td>LAS Engine Technical Overview</td><td>Full pipeline: Eligibility → Loan Offer → KYC → MF Pledging → E-Mandate → E-Sign. Processing ~3 min. API latency 89ms. 99.99% uptime. TPS rate.</td><td>Tech Team</td><td><span class="rbadge rbadge-pending">Pending</span></td></tr>
-      <tr><td>Digital Loan Journey — Step by Step</td><td>OTP login → portfolio fetch (CAMS/KFINTECH) → eligibility check → offer generation → KYC (DigiLocker) → pledging (OTP) → e-mandate → OD creation → disbursal. Timelines at each step.</td><td>Ops + Tech</td><td><span class="rbadge rbadge-pending">Pending</span></td></tr>
-      <tr><td>CAMS &amp; KFINTECH RTA Integration Guide</td><td>How portfolio is fetched from both RTAs, what happens if only one RTA fetched, mobile/email match requirement, common errors and resolution</td><td>Tech Team</td><td><span class="rbadge rbadge-pending">Pending</span></td></tr>
-      <tr><td>DigiLocker KYC Process Guide</td><td>Aadhaar-based e-KYC flow, PIN setup, common failures (Aadhaar not linked to mobile), how to fix via UIDAI verification</td><td>Ops Team</td><td><span class="rbadge rbadge-pending">Pending</span></td></tr>
-      <tr><td>OTP-Based Pledging Process Guide</td><td>How mutual fund lien is marked digitally via CAMS/KFINTECH OTP, what lodgement means, activation timeline, common OTP failures</td><td>Ops Team</td><td><span class="rbadge rbadge-pending">Pending</span></td></tr>
-      <tr><td>E-Mandate Setup Guide</td><td>How auto-debit is registered, supported banks, debit dates (7th/21st), failure handling, re-attempt process, UPI not supported explanation</td><td>Ops Team</td><td><span class="rbadge rbadge-pending">Pending</span></td></tr>
-      <tr><td>Lodgement &amp; OD Activation Guide</td><td>What happens after pledge — RTA lodgement steps, OD account creation, activation timeline (2-3 hrs), ops monitoring, common delays and escalation</td><td>Ops Team</td><td><span class="rbadge rbadge-pending">Pending</span></td></tr>
+      <tr><td>LAS Engine Technical Overview</td><td>Full pipeline: Eligibility → Loan Offer → KYC → MF Pledging → E-Mandate → E-Sign. Processing ~3 min. API latency 89ms. 99.99% uptime. TPS rate.</td><td>Tech Team</td><td style="text-align:center;width:60px;">
+        <label class="cb-wrap" title="Mark as done">
+          <input type="checkbox" class="doc-cb" id="doc_10" onchange="toggleDoc(this)">
+          <span class="cb-box"></span>
+        </label>
+      </td></tr>
+      <tr><td>Digital Loan Journey — Step by Step</td><td>OTP login → portfolio fetch (CAMS/KFINTECH) → eligibility check → offer generation → KYC (DigiLocker) → pledging (OTP) → e-mandate → OD creation → disbursal. Timelines at each step.</td><td>Ops + Tech</td><td style="text-align:center;width:60px;">
+        <label class="cb-wrap" title="Mark as done">
+          <input type="checkbox" class="doc-cb" id="doc_11" onchange="toggleDoc(this)">
+          <span class="cb-box"></span>
+        </label>
+      </td></tr>
+      <tr><td>CAMS &amp; KFINTECH RTA Integration Guide</td><td>How portfolio is fetched from both RTAs, what happens if only one RTA fetched, mobile/email match requirement, common errors and resolution</td><td>Tech Team</td><td style="text-align:center;width:60px;">
+        <label class="cb-wrap" title="Mark as done">
+          <input type="checkbox" class="doc-cb" id="doc_12" onchange="toggleDoc(this)">
+          <span class="cb-box"></span>
+        </label>
+      </td></tr>
+      <tr><td>DigiLocker KYC Process Guide</td><td>Aadhaar-based e-KYC flow, PIN setup, common failures (Aadhaar not linked to mobile), how to fix via UIDAI verification</td><td>Ops Team</td><td style="text-align:center;width:60px;">
+        <label class="cb-wrap" title="Mark as done">
+          <input type="checkbox" class="doc-cb" id="doc_13" onchange="toggleDoc(this)">
+          <span class="cb-box"></span>
+        </label>
+      </td></tr>
+      <tr><td>OTP-Based Pledging Process Guide</td><td>How mutual fund lien is marked digitally via CAMS/KFINTECH OTP, what lodgement means, activation timeline, common OTP failures</td><td>Ops Team</td><td style="text-align:center;width:60px;">
+        <label class="cb-wrap" title="Mark as done">
+          <input type="checkbox" class="doc-cb" id="doc_14" onchange="toggleDoc(this)">
+          <span class="cb-box"></span>
+        </label>
+      </td></tr>
+      <tr><td>E-Mandate Setup Guide</td><td>How auto-debit is registered, supported banks, debit dates (7th/21st), failure handling, re-attempt process, UPI not supported explanation</td><td>Ops Team</td><td style="text-align:center;width:60px;">
+        <label class="cb-wrap" title="Mark as done">
+          <input type="checkbox" class="doc-cb" id="doc_15" onchange="toggleDoc(this)">
+          <span class="cb-box"></span>
+        </label>
+      </td></tr>
+      <tr><td>Lodgement &amp; OD Activation Guide</td><td>What happens after pledge — RTA lodgement steps, OD account creation, activation timeline (2-3 hrs), ops monitoring, common delays and escalation</td><td>Ops Team</td><td style="text-align:center;width:60px;">
+        <label class="cb-wrap" title="Mark as done">
+          <input type="checkbox" class="doc-cb" id="doc_16" onchange="toggleDoc(this)">
+          <span class="cb-box"></span>
+        </label>
+      </td></tr>
     </tbody>
   </table>
 
   <!-- SECTION 4 -->
   <div class="rag-section-title"><div class="rag-sec-num">4</div><div class="rag-sec-label">API &amp; SDK Reference <span>7 documents</span></div></div>
   <table class="rag-table">
-    <thead><tr><th>Document Name</th><th>What It Must Cover</th><th>Owner</th><th>Status</th></tr></thead>
+    <thead><tr><th>Document Name</th><th>What It Must Cover</th><th>Owner</th><th style="text-align:center;width:60px;">Done?</th></tr></thead>
     <tbody>
-      <tr><td>CAS API Reference</td><td>Base URL, endpoints: init session, fetch portfolio, verify OTP, get offers. Request params, headers (X-SDK-Key, X-SDK-Secret), response formats, error codes</td><td>Tech Team</td><td><span class="rbadge rbadge-pending">Pending</span></td></tr>
-      <tr><td>Lark OS API Reference</td><td>All endpoints: loan-sdk flow, loan-origination (KYC BFL, vKYC, pledge OTP, opportunity submission), loan-management (disbursement, repayment, foreclosure, shortfall, SOA, holding statement)</td><td>Tech Team</td><td><span class="rbadge rbadge-pending">Pending</span></td></tr>
-      <tr><td>Data API Reference</td><td>Base URL: sdk-backend.larkfinserv.com. User management, portfolio &amp; eligibility, loan operations — all endpoints with request/response examples</td><td>Tech Team</td><td><span class="rbadge rbadge-pending">Pending</span></td></tr>
-      <tr><td>CGS API — Capital Gains Statement</td><td>MF Central flow: initiate request → validate OTP → download PDF. Use case: tax reporting. Params and response schema.</td><td>Tech Team</td><td><span class="rbadge rbadge-pending">Pending</span></td></tr>
-      <tr><td>NPM SDK Guide (lark-sdk-multi)</td><td>Installation, VITE_ env variables (SDK_KEY, SDK_SECRET, PARTNER_ID, API_URL), quick start with LoanEligibilitySDK initialization</td><td>Tech Team</td><td><span class="rbadge rbadge-pending">Pending</span></td></tr>
-      <tr><td>Flutter SDK Guide</td><td>pubspec.yaml install (v0.0.3), PartnerConfig initialization, openEligibilityCheck, SDKMode options, sandbox vs production</td><td>Tech Team</td><td><span class="rbadge rbadge-pending">Pending</span></td></tr>
-      <tr><td>Webhook &amp; Sandbox Guide</td><td>Event-driven architecture, webhook setup in Grid, loan event types, sandbox access, test credentials, what can be tested</td><td>Tech Team</td><td><span class="rbadge rbadge-pending">Pending</span></td></tr>
+      <tr><td>CAS API Reference</td><td>Base URL, endpoints: init session, fetch portfolio, verify OTP, get offers. Request params, headers (X-SDK-Key, X-SDK-Secret), response formats, error codes</td><td>Tech Team</td><td style="text-align:center;width:60px;">
+        <label class="cb-wrap" title="Mark as done">
+          <input type="checkbox" class="doc-cb" id="doc_17" onchange="toggleDoc(this)">
+          <span class="cb-box"></span>
+        </label>
+      </td></tr>
+      <tr><td>Lark OS API Reference</td><td>All endpoints: loan-sdk flow, loan-origination (KYC BFL, vKYC, pledge OTP, opportunity submission), loan-management (disbursement, repayment, foreclosure, shortfall, SOA, holding statement)</td><td>Tech Team</td><td style="text-align:center;width:60px;">
+        <label class="cb-wrap" title="Mark as done">
+          <input type="checkbox" class="doc-cb" id="doc_18" onchange="toggleDoc(this)">
+          <span class="cb-box"></span>
+        </label>
+      </td></tr>
+      <tr><td>Data API Reference</td><td>Base URL: sdk-backend.larkfinserv.com. User management, portfolio &amp; eligibility, loan operations — all endpoints with request/response examples</td><td>Tech Team</td><td style="text-align:center;width:60px;">
+        <label class="cb-wrap" title="Mark as done">
+          <input type="checkbox" class="doc-cb" id="doc_19" onchange="toggleDoc(this)">
+          <span class="cb-box"></span>
+        </label>
+      </td></tr>
+      <tr><td>CGS API — Capital Gains Statement</td><td>MF Central flow: initiate request → validate OTP → download PDF. Use case: tax reporting. Params and response schema.</td><td>Tech Team</td><td style="text-align:center;width:60px;">
+        <label class="cb-wrap" title="Mark as done">
+          <input type="checkbox" class="doc-cb" id="doc_20" onchange="toggleDoc(this)">
+          <span class="cb-box"></span>
+        </label>
+      </td></tr>
+      <tr><td>NPM SDK Guide (lark-sdk-multi)</td><td>Installation, VITE_ env variables (SDK_KEY, SDK_SECRET, PARTNER_ID, API_URL), quick start with LoanEligibilitySDK initialization</td><td>Tech Team</td><td style="text-align:center;width:60px;">
+        <label class="cb-wrap" title="Mark as done">
+          <input type="checkbox" class="doc-cb" id="doc_21" onchange="toggleDoc(this)">
+          <span class="cb-box"></span>
+        </label>
+      </td></tr>
+      <tr><td>Flutter SDK Guide</td><td>pubspec.yaml install (v0.0.3), PartnerConfig initialization, openEligibilityCheck, SDKMode options, sandbox vs production</td><td>Tech Team</td><td style="text-align:center;width:60px;">
+        <label class="cb-wrap" title="Mark as done">
+          <input type="checkbox" class="doc-cb" id="doc_22" onchange="toggleDoc(this)">
+          <span class="cb-box"></span>
+        </label>
+      </td></tr>
+      <tr><td>Webhook &amp; Sandbox Guide</td><td>Event-driven architecture, webhook setup in Grid, loan event types, sandbox access, test credentials, what can be tested</td><td>Tech Team</td><td style="text-align:center;width:60px;">
+        <label class="cb-wrap" title="Mark as done">
+          <input type="checkbox" class="doc-cb" id="doc_23" onchange="toggleDoc(this)">
+          <span class="cb-box"></span>
+        </label>
+      </td></tr>
     </tbody>
   </table>
 
   <!-- SECTION 5 -->
   <div class="rag-section-title"><div class="rag-sec-num">5</div><div class="rag-sec-label">Admin Portal <span>6 documents</span></div></div>
   <table class="rag-table">
-    <thead><tr><th>Document Name</th><th>What It Must Cover</th><th>Owner</th><th>Status</th></tr></thead>
+    <thead><tr><th>Document Name</th><th>What It Must Cover</th><th>Owner</th><th style="text-align:center;width:60px;">Done?</th></tr></thead>
     <tbody>
-      <tr><td>Admin Portal Overview</td><td>What the admin portal is, who uses it, main sections: user management, loan monitoring, partner management, knowledge base, analytics, configuration</td><td>Product</td><td><span class="rbadge rbadge-pending">Pending</span></td></tr>
-      <tr><td>Admin Roles &amp; Permissions Guide</td><td>Role types (Super Admin, Admin, Manager, Staff), what each can view/edit/approve, how to assign and revoke roles, SSO setup</td><td>Tech Team</td><td><span class="rbadge rbadge-pending">Pending</span></td></tr>
-      <tr><td>Loan Application Monitoring Guide</td><td>How to track applications in real-time, identify stuck applications (&gt;10 min at a stage), drop-off point analysis, how to intervene</td><td>Ops Team</td><td><span class="rbadge rbadge-pending">Pending</span></td></tr>
-      <tr><td>Knowledge Base Upload Guide (LISA)</td><td>How to upload PDF/DOCX for LISA, supported formats, file naming convention, ingestion trigger, index rebuild time (~5 min), version control</td><td>Ops + Tech</td><td><span class="rbadge rbadge-pending">Pending</span></td></tr>
-      <tr><td>Analytics Dashboard Guide</td><td>How to read dashboard — top queries, resolution rate, unanswered questions, department breakdown, usage trends, avg response time</td><td>Ops Team</td><td><span class="rbadge rbadge-pending">Pending</span></td></tr>
-      <tr><td>White-Label &amp; Partner Configuration</td><td>How to set up branded portal (logo, colors, domain), generate white-label link, approve new partners, configure own ARN/lender code</td><td>Product</td><td><span class="rbadge rbadge-pending">Pending</span></td></tr>
+      <tr><td>Admin Portal Overview</td><td>What the admin portal is, who uses it, main sections: user management, loan monitoring, partner management, knowledge base, analytics, configuration</td><td>Product</td><td style="text-align:center;width:60px;">
+        <label class="cb-wrap" title="Mark as done">
+          <input type="checkbox" class="doc-cb" id="doc_24" onchange="toggleDoc(this)">
+          <span class="cb-box"></span>
+        </label>
+      </td></tr>
+      <tr><td>Admin Roles &amp; Permissions Guide</td><td>Role types (Super Admin, Admin, Manager, Staff), what each can view/edit/approve, how to assign and revoke roles, SSO setup</td><td>Tech Team</td><td style="text-align:center;width:60px;">
+        <label class="cb-wrap" title="Mark as done">
+          <input type="checkbox" class="doc-cb" id="doc_25" onchange="toggleDoc(this)">
+          <span class="cb-box"></span>
+        </label>
+      </td></tr>
+      <tr><td>Loan Application Monitoring Guide</td><td>How to track applications in real-time, identify stuck applications (&gt;10 min at a stage), drop-off point analysis, how to intervene</td><td>Ops Team</td><td style="text-align:center;width:60px;">
+        <label class="cb-wrap" title="Mark as done">
+          <input type="checkbox" class="doc-cb" id="doc_26" onchange="toggleDoc(this)">
+          <span class="cb-box"></span>
+        </label>
+      </td></tr>
+      <tr><td>Knowledge Base Upload Guide (LISA)</td><td>How to upload PDF/DOCX for LISA, supported formats, file naming convention, ingestion trigger, index rebuild time (~5 min), version control</td><td>Ops + Tech</td><td style="text-align:center;width:60px;">
+        <label class="cb-wrap" title="Mark as done">
+          <input type="checkbox" class="doc-cb" id="doc_27" onchange="toggleDoc(this)">
+          <span class="cb-box"></span>
+        </label>
+      </td></tr>
+      <tr><td>Analytics Dashboard Guide</td><td>How to read dashboard — top queries, resolution rate, unanswered questions, department breakdown, usage trends, avg response time</td><td>Ops Team</td><td style="text-align:center;width:60px;">
+        <label class="cb-wrap" title="Mark as done">
+          <input type="checkbox" class="doc-cb" id="doc_28" onchange="toggleDoc(this)">
+          <span class="cb-box"></span>
+        </label>
+      </td></tr>
+      <tr><td>White-Label &amp; Partner Configuration</td><td>How to set up branded portal (logo, colors, domain), generate white-label link, approve new partners, configure own ARN/lender code</td><td>Product</td><td style="text-align:center;width:60px;">
+        <label class="cb-wrap" title="Mark as done">
+          <input type="checkbox" class="doc-cb" id="doc_29" onchange="toggleDoc(this)">
+          <span class="cb-box"></span>
+        </label>
+      </td></tr>
     </tbody>
   </table>
 
   <!-- SECTION 6 -->
   <div class="rag-section-title"><div class="rag-sec-num">6</div><div class="rag-sec-label">Partner Portal <span>6 documents</span></div></div>
   <table class="rag-table">
-    <thead><tr><th>Document Name</th><th>What It Must Cover</th><th>Owner</th><th>Status</th></tr></thead>
+    <thead><tr><th>Document Name</th><th>What It Must Cover</th><th>Owner</th><th style="text-align:center;width:60px;">Done?</th></tr></thead>
     <tbody>
-      <tr><td>Partner Portal Overview</td><td>What partners can see and do — loan pipeline dashboard, customer status, earnings tracker, white-label link, team management, support</td><td>Product</td><td><span class="rbadge rbadge-pending">Pending</span></td></tr>
-      <tr><td>Partner Onboarding Guide</td><td>Registration → verification call (within 24 hrs) → agreement signing → portal access → white-label link → training session → first 5 applications monitoring</td><td>Ops Team</td><td><span class="rbadge rbadge-pending">Pending</span></td></tr>
-      <tr><td>Partner Dashboard Guide</td><td>How to read loan pipeline, track conversion rates, view customer application status, download reports, navigate sub-sections</td><td>Product</td><td><span class="rbadge rbadge-pending">Pending</span></td></tr>
-      <tr><td>Earnings &amp; Payout Guide</td><td>How trail income is calculated, NIM sharing structure, how to read payout reports, quarterly settlement cycle, how to raise payout discrepancy</td><td>Business Team</td><td><span class="rbadge rbadge-pending">Pending</span></td></tr>
-      <tr><td>Partner Team Management Guide</td><td>How partner admin adds sub-users, assigns permissions, manages team access, contact Lark admin if role issues arise</td><td>Product</td><td><span class="rbadge rbadge-pending">Pending</span></td></tr>
-      <tr><td>Partner Support &amp; Escalation Guide</td><td>How to raise issues, SLA for response, Lark support contacts, white-label link issues, payout dispute process, temporary pause of partnership</td><td>Ops Team</td><td><span class="rbadge rbadge-pending">Pending</span></td></tr>
+      <tr><td>Partner Portal Overview</td><td>What partners can see and do — loan pipeline dashboard, customer status, earnings tracker, white-label link, team management, support</td><td>Product</td><td style="text-align:center;width:60px;">
+        <label class="cb-wrap" title="Mark as done">
+          <input type="checkbox" class="doc-cb" id="doc_30" onchange="toggleDoc(this)">
+          <span class="cb-box"></span>
+        </label>
+      </td></tr>
+      <tr><td>Partner Onboarding Guide</td><td>Registration → verification call (within 24 hrs) → agreement signing → portal access → white-label link → training session → first 5 applications monitoring</td><td>Ops Team</td><td style="text-align:center;width:60px;">
+        <label class="cb-wrap" title="Mark as done">
+          <input type="checkbox" class="doc-cb" id="doc_31" onchange="toggleDoc(this)">
+          <span class="cb-box"></span>
+        </label>
+      </td></tr>
+      <tr><td>Partner Dashboard Guide</td><td>How to read loan pipeline, track conversion rates, view customer application status, download reports, navigate sub-sections</td><td>Product</td><td style="text-align:center;width:60px;">
+        <label class="cb-wrap" title="Mark as done">
+          <input type="checkbox" class="doc-cb" id="doc_32" onchange="toggleDoc(this)">
+          <span class="cb-box"></span>
+        </label>
+      </td></tr>
+      <tr><td>Earnings &amp; Payout Guide</td><td>How trail income is calculated, NIM sharing structure, how to read payout reports, quarterly settlement cycle, how to raise payout discrepancy</td><td>Business Team</td><td style="text-align:center;width:60px;">
+        <label class="cb-wrap" title="Mark as done">
+          <input type="checkbox" class="doc-cb" id="doc_33" onchange="toggleDoc(this)">
+          <span class="cb-box"></span>
+        </label>
+      </td></tr>
+      <tr><td>Partner Team Management Guide</td><td>How partner admin adds sub-users, assigns permissions, manages team access, contact Lark admin if role issues arise</td><td>Product</td><td style="text-align:center;width:60px;">
+        <label class="cb-wrap" title="Mark as done">
+          <input type="checkbox" class="doc-cb" id="doc_34" onchange="toggleDoc(this)">
+          <span class="cb-box"></span>
+        </label>
+      </td></tr>
+      <tr><td>Partner Support &amp; Escalation Guide</td><td>How to raise issues, SLA for response, Lark support contacts, white-label link issues, payout dispute process, temporary pause of partnership</td><td>Ops Team</td><td style="text-align:center;width:60px;">
+        <label class="cb-wrap" title="Mark as done">
+          <input type="checkbox" class="doc-cb" id="doc_35" onchange="toggleDoc(this)">
+          <span class="cb-box"></span>
+        </label>
+      </td></tr>
     </tbody>
   </table>
 
   <!-- SECTION 7 -->
   <div class="rag-section-title"><div class="rag-sec-num">7</div><div class="rag-sec-label">Lender Details &amp; Loan Operations <span>4 documents</span></div></div>
   <table class="rag-table">
-    <thead><tr><th>Document Name</th><th>What It Must Cover</th><th>Owner</th><th>Status</th></tr></thead>
+    <thead><tr><th>Document Name</th><th>What It Must Cover</th><th>Owner</th><th style="text-align:center;width:60px;">Done?</th></tr></thead>
     <tbody>
-      <tr><td>Lender Comparison Sheet</td><td>All 7 lenders: DSP Finance, Bajaj Finserv, ABFL, TATA Capital, Jio Credit, SMFG, Anand Rathi. For each: interest rate, processing fee, process type, min/max ticket, eligible entities, LTV, TAT</td><td>Ops Manager</td><td><span class="rbadge rbadge-pending">Pending</span></td></tr>
-      <tr><td>Digital Journey SOP (LAMF)</td><td>Ops team role in 100% digital cases — monitoring, real-time intervention triggers (&gt;10 min stuck), screen sharing, post-sanction support, tools used</td><td>Ops Team</td><td><span class="rbadge rbadge-pending">Pending</span></td></tr>
-      <tr><td>Phygital / Offline Journey SOP</td><td>End-to-end ops coordination — eligibility, document checklist per entity, lender submission, sanction tracking, courier coordination, pledge execution, disbursal, post-disbursal handoff</td><td>Ops Team</td><td><span class="rbadge rbadge-pending">Pending</span></td></tr>
-      <tr><td>LAS (Loan Against Shares) SOP</td><td>Demat share pledge, NSDL/CDSL process, margin call monitoring, invocation, corporate actions (dividends, voting rights), LAS-specific risks</td><td>Ops Team</td><td><span class="rbadge rbadge-pending">Pending</span></td></tr>
+      <tr><td>Lender Comparison Sheet</td><td>All 7 lenders: DSP Finance, Bajaj Finserv, ABFL, TATA Capital, Jio Credit, SMFG, Anand Rathi. For each: interest rate, processing fee, process type, min/max ticket, eligible entities, LTV, TAT</td><td>Ops Manager</td><td style="text-align:center;width:60px;">
+        <label class="cb-wrap" title="Mark as done">
+          <input type="checkbox" class="doc-cb" id="doc_36" onchange="toggleDoc(this)">
+          <span class="cb-box"></span>
+        </label>
+      </td></tr>
+      <tr><td>Digital Journey SOP (LAMF)</td><td>Ops team role in 100% digital cases — monitoring, real-time intervention triggers (&gt;10 min stuck), screen sharing, post-sanction support, tools used</td><td>Ops Team</td><td style="text-align:center;width:60px;">
+        <label class="cb-wrap" title="Mark as done">
+          <input type="checkbox" class="doc-cb" id="doc_37" onchange="toggleDoc(this)">
+          <span class="cb-box"></span>
+        </label>
+      </td></tr>
+      <tr><td>Phygital / Offline Journey SOP</td><td>End-to-end ops coordination — eligibility, document checklist per entity, lender submission, sanction tracking, courier coordination, pledge execution, disbursal, post-disbursal handoff</td><td>Ops Team</td><td style="text-align:center;width:60px;">
+        <label class="cb-wrap" title="Mark as done">
+          <input type="checkbox" class="doc-cb" id="doc_38" onchange="toggleDoc(this)">
+          <span class="cb-box"></span>
+        </label>
+      </td></tr>
+      <tr><td>LAS (Loan Against Shares) SOP</td><td>Demat share pledge, NSDL/CDSL process, margin call monitoring, invocation, corporate actions (dividends, voting rights), LAS-specific risks</td><td>Ops Team</td><td style="text-align:center;width:60px;">
+        <label class="cb-wrap" title="Mark as done">
+          <input type="checkbox" class="doc-cb" id="doc_39" onchange="toggleDoc(this)">
+          <span class="cb-box"></span>
+        </label>
+      </td></tr>
     </tbody>
   </table>
 
   <!-- SECTION 8 -->
   <div class="rag-section-title"><div class="rag-sec-num">8</div><div class="rag-sec-label">Loan Servicing SOPs <span>3 documents</span></div></div>
   <table class="rag-table">
-    <thead><tr><th>Document Name</th><th>What It Must Cover</th><th>Owner</th><th>Status</th></tr></thead>
+    <thead><tr><th>Document Name</th><th>What It Must Cover</th><th>Owner</th><th style="text-align:center;width:60px;">Done?</th></tr></thead>
     <tbody>
-      <tr><td>Withdrawal &amp; Enhancement SOP</td><td>Digital withdrawal (app-based, 10-30 min), offline withdrawal (email format, CC Lark Ops), enhancement via portfolio appreciation, additional pledge process, timelines, common issues</td><td>Ops Team</td><td><span class="rbadge rbadge-pending">Pending</span></td></tr>
-      <tr><td>Repayment &amp; Foreclosure SOP</td><td>Interest auto-debit (7th/21st, daily balance calculation with example), principal repayment (NEFT/RTGS, lien release 24-48 hrs), foreclosure steps (digital + offline), closure letter process</td><td>Ops Team</td><td><span class="rbadge rbadge-pending">Pending</span></td></tr>
-      <tr><td>Margin Shortfall &amp; Invocation SOP</td><td>Alert from lender → notify customer (email + WhatsApp + call) → 3 options explained → cure period tracking → invocation trigger → forced sale coordination → post-sale settlement</td><td>Ops Team</td><td><span class="rbadge rbadge-pending">Pending</span></td></tr>
+      <tr><td>Withdrawal &amp; Enhancement SOP</td><td>Digital withdrawal (app-based, 10-30 min), offline withdrawal (email format, CC Lark Ops), enhancement via portfolio appreciation, additional pledge process, timelines, common issues</td><td>Ops Team</td><td style="text-align:center;width:60px;">
+        <label class="cb-wrap" title="Mark as done">
+          <input type="checkbox" class="doc-cb" id="doc_40" onchange="toggleDoc(this)">
+          <span class="cb-box"></span>
+        </label>
+      </td></tr>
+      <tr><td>Repayment &amp; Foreclosure SOP</td><td>Interest auto-debit (7th/21st, daily balance calculation with example), principal repayment (NEFT/RTGS, lien release 24-48 hrs), foreclosure steps (digital + offline), closure letter process</td><td>Ops Team</td><td style="text-align:center;width:60px;">
+        <label class="cb-wrap" title="Mark as done">
+          <input type="checkbox" class="doc-cb" id="doc_41" onchange="toggleDoc(this)">
+          <span class="cb-box"></span>
+        </label>
+      </td></tr>
+      <tr><td>Margin Shortfall &amp; Invocation SOP</td><td>Alert from lender → notify customer (email + WhatsApp + call) → 3 options explained → cure period tracking → invocation trigger → forced sale coordination → post-sale settlement</td><td>Ops Team</td><td style="text-align:center;width:60px;">
+        <label class="cb-wrap" title="Mark as done">
+          <input type="checkbox" class="doc-cb" id="doc_42" onchange="toggleDoc(this)">
+          <span class="cb-box"></span>
+        </label>
+      </td></tr>
     </tbody>
   </table>
 
   <!-- SECTION 9 -->
   <div class="rag-section-title"><div class="rag-sec-num">9</div><div class="rag-sec-label">Securities, LTV &amp; Troubleshooting <span>5 documents</span></div></div>
   <table class="rag-table">
-    <thead><tr><th>Document Name</th><th>What It Must Cover</th><th>Owner</th><th>Status</th></tr></thead>
+    <thead><tr><th>Document Name</th><th>What It Must Cover</th><th>Owner</th><th style="text-align:center;width:60px;">Done?</th></tr></thead>
     <tbody>
-      <tr><td>Supported Securities &amp; LTV Guide</td><td>Supported MFs (Equity, Debt, Hybrid, Index, Liquid), NOT supported (ELSS, Retirement, Child Gift). Demat shares (NSDL/CDSL), ETFs, bonds, govt securities, crypto not supported. LTV per asset class.</td><td>Product + Ops</td><td><span class="rbadge rbadge-pending">Pending</span></td></tr>
-      <tr><td>Loan End-Use Restrictions</td><td>What loan CANNOT be used for — speculative trading, crypto, margin funding. How to explain to customers. Lender monitoring of fund use.</td><td>Compliance</td><td><span class="rbadge rbadge-pending">Pending</span></td></tr>
-      <tr><td>Digital Journey Troubleshooting Guide</td><td>OTP not received, DigiLocker failure, portfolio incomplete fetch, e-mandate failure, selfie issues, bank selection error, CAMS vs KFINTECH mismatch — cause + resolution for each</td><td>Ops Team</td><td><span class="rbadge rbadge-pending">Pending</span></td></tr>
-      <tr><td>Disbursal &amp; Repayment Troubleshooting</td><td>OD not activated, wrong account credited, lender not responding, lien not released after repayment, e-mandate bounce handling, UPI not supported</td><td>Ops Team</td><td><span class="rbadge rbadge-pending">Pending</span></td></tr>
-      <tr><td>Top 50 Operations FAQs</td><td>All 50 Q&amp;A from Operations Manual — customer journey, disbursal, repayment, lender coordination, partner issues, system issues, compliance, product-specific, escalation scenarios</td><td>Ops Team</td><td><span class="rbadge rbadge-draft">Draft Ready</span></td></tr>
+      <tr><td>Supported Securities &amp; LTV Guide</td><td>Supported MFs (Equity, Debt, Hybrid, Index, Liquid), NOT supported (ELSS, Retirement, Child Gift). Demat shares (NSDL/CDSL), ETFs, bonds, govt securities, crypto not supported. LTV per asset class.</td><td>Product + Ops</td><td style="text-align:center;width:60px;">
+        <label class="cb-wrap" title="Mark as done">
+          <input type="checkbox" class="doc-cb" id="doc_43" onchange="toggleDoc(this)">
+          <span class="cb-box"></span>
+        </label>
+      </td></tr>
+      <tr><td>Loan End-Use Restrictions</td><td>What loan CANNOT be used for — speculative trading, crypto, margin funding. How to explain to customers. Lender monitoring of fund use.</td><td>Compliance</td><td style="text-align:center;width:60px;">
+        <label class="cb-wrap" title="Mark as done">
+          <input type="checkbox" class="doc-cb" id="doc_44" onchange="toggleDoc(this)">
+          <span class="cb-box"></span>
+        </label>
+      </td></tr>
+      <tr><td>Digital Journey Troubleshooting Guide</td><td>OTP not received, DigiLocker failure, portfolio incomplete fetch, e-mandate failure, selfie issues, bank selection error, CAMS vs KFINTECH mismatch — cause + resolution for each</td><td>Ops Team</td><td style="text-align:center;width:60px;">
+        <label class="cb-wrap" title="Mark as done">
+          <input type="checkbox" class="doc-cb" id="doc_45" onchange="toggleDoc(this)">
+          <span class="cb-box"></span>
+        </label>
+      </td></tr>
+      <tr><td>Disbursal &amp; Repayment Troubleshooting</td><td>OD not activated, wrong account credited, lender not responding, lien not released after repayment, e-mandate bounce handling, UPI not supported</td><td>Ops Team</td><td style="text-align:center;width:60px;">
+        <label class="cb-wrap" title="Mark as done">
+          <input type="checkbox" class="doc-cb" id="doc_46" onchange="toggleDoc(this)">
+          <span class="cb-box"></span>
+        </label>
+      </td></tr>
+      <tr><td>Top 50 Operations FAQs</td><td>All 50 Q&amp;A from Operations Manual — customer journey, disbursal, repayment, lender coordination, partner issues, system issues, compliance, product-specific, escalation scenarios</td><td>Ops Team</td><td style="text-align:center;width:60px;">
+        <label class="cb-wrap" title="Mark as done">
+          <input type="checkbox" class="doc-cb" id="doc_45" onchange="toggleDoc(this)">
+          <span class="cb-box"></span>
+        </label>
+      </td></tr>
     </tbody>
   </table>
 
   <!-- SECTION 10 -->
   <div class="rag-section-title"><div class="rag-sec-num">10</div><div class="rag-sec-label">Compliance, Legal &amp; Grievance <span>5 documents</span></div></div>
   <table class="rag-table">
-    <thead><tr><th>Document Name</th><th>What It Must Cover</th><th>Owner</th><th>Status</th></tr></thead>
+    <thead><tr><th>Document Name</th><th>What It Must Cover</th><th>Owner</th><th style="text-align:center;width:60px;">Done?</th></tr></thead>
     <tbody>
-      <tr><td>KYC &amp; AML Procedure Manual</td><td>DigiLocker-based KYC, PAN/Aadhaar verification, entity-wise KYC requirements, PMLA obligations, prohibited customer types, suspicious transaction reporting</td><td>Compliance</td><td><span class="rbadge rbadge-pending">Pending</span></td></tr>
-      <tr><td>RBI Digital Lending Guidelines Summary</td><td>DLG September 2022 — what it means for Lark, LSP obligations, consent requirements, fair practices code, customer data norms</td><td>Compliance</td><td><span class="rbadge rbadge-pending">Pending</span></td></tr>
-      <tr><td>Data Privacy &amp; DPDP Policy</td><td>DPDP Act 2023 compliance, what data Lark collects, how it is used, consent withdrawal process, data retention policy, third-party sharing rules</td><td>Compliance + Legal</td><td><span class="rbadge rbadge-pending">Pending</span></td></tr>
-      <tr><td>Grievance Redressal Process</td><td>3-level escalation: Level 1 (Ops team, 2 hr ack), Level 2 (grievance.officer@larkfinserv.com, 3 working days), Level 3 (Vinita.kumari@larkfinserv.com, 3 working days). Ticket lifecycle.</td><td>Ops Manager</td><td><span class="rbadge rbadge-pending">Pending</span></td></tr>
-      <tr><td>Incident Response &amp; Escalation Matrix</td><td>Data breach protocol, system failure steps, legal threat handling, media inquiry procedure, internal escalation contacts, lender escalation contacts per lender</td><td>Compliance + Tech</td><td><span class="rbadge rbadge-pending">Pending</span></td></tr>
+      <tr><td>KYC &amp; AML Procedure Manual</td><td>DigiLocker-based KYC, PAN/Aadhaar verification, entity-wise KYC requirements, PMLA obligations, prohibited customer types, suspicious transaction reporting</td><td>Compliance</td><td style="text-align:center;width:60px;">
+        <label class="cb-wrap" title="Mark as done">
+          <input type="checkbox" class="doc-cb" id="doc_47" onchange="toggleDoc(this)">
+          <span class="cb-box"></span>
+        </label>
+      </td></tr>
+      <tr><td>RBI Digital Lending Guidelines Summary</td><td>DLG September 2022 — what it means for Lark, LSP obligations, consent requirements, fair practices code, customer data norms</td><td>Compliance</td><td style="text-align:center;width:60px;">
+        <label class="cb-wrap" title="Mark as done">
+          <input type="checkbox" class="doc-cb" id="doc_48" onchange="toggleDoc(this)">
+          <span class="cb-box"></span>
+        </label>
+      </td></tr>
+      <tr><td>Data Privacy &amp; DPDP Policy</td><td>DPDP Act 2023 compliance, what data Lark collects, how it is used, consent withdrawal process, data retention policy, third-party sharing rules</td><td>Compliance + Legal</td><td style="text-align:center;width:60px;">
+        <label class="cb-wrap" title="Mark as done">
+          <input type="checkbox" class="doc-cb" id="doc_49" onchange="toggleDoc(this)">
+          <span class="cb-box"></span>
+        </label>
+      </td></tr>
+      <tr><td>Grievance Redressal Process</td><td>3-level escalation: Level 1 (Ops team, 2 hr ack), Level 2 (grievance.officer@larkfinserv.com, 3 working days), Level 3 (Vinita.kumari@larkfinserv.com, 3 working days). Ticket lifecycle.</td><td>Ops Manager</td><td style="text-align:center;width:60px;">
+        <label class="cb-wrap" title="Mark as done">
+          <input type="checkbox" class="doc-cb" id="doc_50" onchange="toggleDoc(this)">
+          <span class="cb-box"></span>
+        </label>
+      </td></tr>
+      <tr><td>Incident Response &amp; Escalation Matrix</td><td>Data breach protocol, system failure steps, legal threat handling, media inquiry procedure, internal escalation contacts, lender escalation contacts per lender</td><td>Compliance + Tech</td><td style="text-align:center;width:60px;">
+        <label class="cb-wrap" title="Mark as done">
+          <input type="checkbox" class="doc-cb" id="doc_51" onchange="toggleDoc(this)">
+          <span class="cb-box"></span>
+        </label>
+      </td></tr>
     </tbody>
   </table>
 
@@ -2440,5 +2680,42 @@ document.querySelectorAll('.anchor').forEach((sec, i) => {
   if (sh) revealObs.observe(sh);
 });
 </script>
+
+<script>
+// ── RAG Checklist persistence + progress ──────────────────
+function updateProgress() {
+  const all = document.querySelectorAll('.doc-cb');
+  const done = document.querySelectorAll('.doc-cb:checked');
+  const pct = all.length ? Math.round(done.length / all.length * 100) : 0;
+  const fill = document.getElementById('progress-fill');
+  const lbl  = document.getElementById('progress-label');
+  if (fill) fill.style.width = pct + '%';
+  if (lbl)  lbl.textContent = done.length + ' / ' + all.length + ' Done';
+}
+
+function toggleDoc(cb) {
+  const row = cb.closest('tr');
+  if (cb.checked) row.classList.add('row-done');
+  else row.classList.remove('row-done');
+  // persist
+  const state = {};
+  document.querySelectorAll('.doc-cb').forEach(c => { state[c.id] = c.checked; });
+  localStorage.setItem('lisa_rag_checklist', JSON.stringify(state));
+  updateProgress();
+}
+
+// Restore on load
+document.addEventListener('DOMContentLoaded', () => {
+  const saved = JSON.parse(localStorage.getItem('lisa_rag_checklist') || '{}');
+  document.querySelectorAll('.doc-cb').forEach(cb => {
+    if (saved[cb.id]) {
+      cb.checked = true;
+      cb.closest('tr').classList.add('row-done');
+    }
+  });
+  updateProgress();
+});
+</script>
+
 </body>
 </html>
