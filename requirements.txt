@@ -1,0 +1,47 @@
+# ═══════════════════════════════════════════════════════════════
+# LISA AI (RAG Edition) - Python Dependencies
+# ═══════════════════════════════════════════════════════════════
+
+# --- Flask Web Framework ---
+flask==3.0.0
+werkzeug==3.0.1
+flask-sqlalchemy>=3.1.0
+flask-login>=0.6.3
+
+# --- OpenAI ---
+openai>=1.12.0
+langchain-openai>=0.3.0
+
+# --- LangChain Ecosystem ---
+langchain>=0.3.20
+langchain-core>=0.3.28
+langchain-community>=0.3.19
+langchain-text-splitters>=0.3.5
+
+# --- LangGraph ---
+langgraph>=0.2.62
+langgraph-checkpoint>=2.0.12
+
+# --- LangSmith ---
+langsmith>=0.2.10
+
+# --- Vector Store ---
+faiss-cpu>=1.7.4
+
+# --- Re-ranking ---
+sentence-transformers>=2.2.0
+
+# --- Document Processing ---
+pypdf>=4.0.0
+
+# --- Database ---
+psycopg2-binary>=2.9.9  # PostgreSQL (optional, SQLite works by default)
+
+# --- Environment & Utilities ---
+python-dotenv==1.0.0
+requests>=2.31.0
+pydantic>=2.5.0
+
+# --- Legacy Gemini (fallback if no OpenAI key) ---
+langchain_google_genai>=2.0.8
+google-generativeai>=0.8.3

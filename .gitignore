@@ -1,3 +1,15 @@
+# ─── LISA AI - Project Specific ───────────────────────────────
+.env
+.env.*
+vectorstore/
+instance/
+*.db
+*.sqlite3
+*.DS_Store
+.DS_Store
+data/
+
+# ───────────────────────────────────────────────────────────────
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[codz]
