@@ -795,6 +795,7 @@ tbody tr { transition: background 0.12s; }
       <div class="nav-group-label">Knowledge Base</div>
       <a class="nav-link" onclick="goto('rag-docs')">What Docs LISA Needs</a>
       <a class="nav-link" onclick="goto('doc-format')">How to Write Docs</a>
+      <a class="nav-link" onclick="goto('rag-checklist')">RAG Doc Checklist</a>
     </div>
 
     <div class="nav-group">
@@ -1954,6 +1955,222 @@ Eligible fund categories: Equity funds, debt funds, hybrid funds, ETFs, index fu
 Ineligible: ELSS funds (lock-in), closed-ended funds.
 Minimum portfolio value: Rs. 50,000.
 KYC: Must be Aadhaar/PAN linked.</pre>
+</div>
+
+<div class="divider"></div>
+
+<!-- ════════════════════════════════════════════
+     RAG DOC CHECKLIST
+════════════════════════════════════════════ -->
+<div id="rag-checklist" class="anchor">
+  <div class="section-header">
+    <div class="eyebrow">Knowledge Base</div>
+    <h2><span class="ico">&#9989;</span> RAG Document Checklist — Full List</h2>
+    <p>Complete list of all 45 documents required to build LISA's knowledge base across 10 categories. Each document must be prepared, reviewed, and uploaded before LISA can answer queries in that area. Share this with your team to assign ownership and track progress.</p>
+  </div>
+
+  <div class="highlight">&#128161; <strong>Instructions:</strong> Format should be PDF or DOCX. Use exact file names as listed. Upload to the shared <code>data/</code> folder and notify the LISA admin to trigger re-ingestion. Priority 1 documents must be completed first — LISA cannot go live without them.</div>
+
+  <!-- Summary stats -->
+  <div class="reveal-group" style="display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin:24px 0 32px;">
+    <div style="background:#fff;border:1px solid #E8EEFF;border-radius:12px;padding:20px;text-align:center;box-shadow:0 2px 10px rgba(0,0,0,0.05);">
+      <div style="font-size:28px;font-weight:800;color:#0050CC;font-family:'Inter',sans-serif;">45</div>
+      <div style="font-size:11px;color:#6B7A99;margin-top:2px;">Total Documents</div>
+    </div>
+    <div style="background:#fff;border:1px solid #E8EEFF;border-radius:12px;padding:20px;text-align:center;box-shadow:0 2px 10px rgba(0,0,0,0.05);">
+      <div style="font-size:28px;font-weight:800;color:#5B21B6;font-family:'Inter',sans-serif;">10</div>
+      <div style="font-size:11px;color:#6B7A99;margin-top:2px;">Categories</div>
+    </div>
+    <div style="background:#fff;border:1px solid #E8EEFF;border-radius:12px;padding:20px;text-align:center;box-shadow:0 2px 10px rgba(0,0,0,0.05);">
+      <div style="font-size:28px;font-weight:800;color:#DC2626;font-family:'Inter',sans-serif;">12</div>
+      <div style="font-size:11px;color:#6B7A99;margin-top:2px;">Priority 1 Docs</div>
+    </div>
+    <div style="background:#fff;border:1px solid #E8EEFF;border-radius:12px;padding:20px;text-align:center;box-shadow:0 2px 10px rgba(0,0,0,0.05);">
+      <div style="font-size:28px;font-weight:800;color:#059669;font-family:'Inter',sans-serif;">~3</div>
+      <div style="font-size:11px;color:#6B7A99;margin-top:2px;">Weeks to Complete</div>
+    </div>
+  </div>
+
+  <!-- Shared table styles -->
+  <style>
+  .rag-table { width:100%; border-collapse:collapse; border-radius:12px; overflow:hidden; box-shadow:0 2px 16px rgba(0,0,0,0.07); margin-bottom:32px; }
+  .rag-table thead tr { background:linear-gradient(135deg,#0D0D2B,#1A1A4E); }
+  .rag-table thead th { padding:12px 16px; text-align:left; font-size:11px; font-weight:700; color:#F0A500; letter-spacing:.8px; text-transform:uppercase; }
+  .rag-table tbody tr { background:#fff; border-bottom:1px solid #EEF2FF; }
+  .rag-table tbody tr:nth-child(even) { background:#F8FAFF; }
+  .rag-table tbody tr:hover { background:#EEF4FF; }
+  .rag-table tbody td { padding:11px 16px; font-size:13px; color:#2D3748; vertical-align:top; }
+  .rag-table tbody td:first-child { font-weight:600; color:#0D0D2B; width:28%; }
+  .rag-table tbody td:nth-child(3) { width:14%; }
+  .rag-table tbody td:last-child { width:10%; text-align:center; }
+  .rbadge { display:inline-block; padding:3px 10px; border-radius:20px; font-size:11px; font-weight:600; white-space:nowrap; }
+  .rbadge-pending { background:#FEF3C7; color:#92400E; }
+  .rbadge-done    { background:#D1FAE5; color:#065F46; }
+  .rbadge-draft   { background:#DBEAFE; color:#1E3A8A; }
+  .rbadge-p1      { background:#FEE2E2; color:#991B1B; }
+  .rag-section-title { display:flex; align-items:center; gap:12px; margin:36px 0 14px; }
+  .rag-sec-num { background:linear-gradient(135deg,#0050CC,#5B21B6); color:#fff; font-size:12px; font-weight:800; width:30px; height:30px; border-radius:50%; display:flex; align-items:center; justify-content:center; flex-shrink:0; }
+  .rag-sec-label { font-size:15px; font-weight:700; color:#0D0D2B; }
+  .rag-sec-label span { font-size:12px; font-weight:400; color:#6B7A99; margin-left:8px; }
+  .priority-section { margin-top:40px; }
+  .priority-section .rag-table tbody td:first-child { color:#0050CC; width:8%; text-align:center; }
+  .priority-section .rag-table tbody td:nth-child(2) { font-weight:600; color:#0D0D2B; width:22%; }
+  .prow-p1 td { background:#FEF2F2 !important; }
+  .prow-p2 td { background:#FFFBEB !important; }
+  .prow-p3 td { background:#EFF6FF !important; }
+  </style>
+
+  <!-- SECTION 1 -->
+  <div class="rag-section-title"><div class="rag-sec-num">1</div><div class="rag-sec-label">Company &amp; Platform <span>4 documents</span></div></div>
+  <table class="rag-table">
+    <thead><tr><th>Document Name</th><th>What It Must Cover</th><th>Owner</th><th>Status</th></tr></thead>
+    <tbody>
+      <tr><td>Lark Finserv Company Overview</td><td>Founded July 2023, mission, what Lark is (LSP + TSP, not a lender), milestones, leadership, 50+ partners, ₹300 Cr AUM, RBI compliance</td><td>Marketing</td><td><span class="rbadge rbadge-pending">Pending</span></td></tr>
+      <tr><td>What Lark Does vs What Lenders Do</td><td>Clear boundary — Lark = infrastructure + coordination, Lender = credit + disbursal. Responsibility matrix per stage.</td><td>Ops Manager</td><td><span class="rbadge rbadge-pending">Pending</span></td></tr>
+      <tr><td>Business Models Guide</td><td>SaaS Model, Revenue Share Model, B2C Direct Lending — how each works, who pays what, commercial terms overview</td><td>Business Team</td><td><span class="rbadge rbadge-pending">Pending</span></td></tr>
+      <tr><td>Regulatory Compliance Overview</td><td>RBI DLG September 2022, KYC/AML, DPDP Act 2023, SEBI, IT Act — what each means for Lark operations</td><td>Compliance</td><td><span class="rbadge rbadge-pending">Pending</span></td></tr>
+    </tbody>
+  </table>
+
+  <!-- SECTION 2 -->
+  <div class="rag-section-title"><div class="rag-sec-num">2</div><div class="rag-sec-label">Products <span>5 documents</span></div></div>
+  <table class="rag-table">
+    <thead><tr><th>Document Name</th><th>What It Must Cover</th><th>Owner</th><th>Status</th></tr></thead>
+    <tbody>
+      <tr><td>Lark Edge Product Guide</td><td>For MFDs &amp; IFAs. Zero integration, live in 10 min, ₹2,500/month. Loan tracking, eligibility checker, multiple lenders, marketing creatives, built-in simulator</td><td>Product</td><td><span class="rbadge rbadge-pending">Pending</span></td></tr>
+      <tr><td>Lark Vault Product Guide</td><td>For Wealth Platforms. White-labeled portal, live in 1 hr, ₹12,500/month. Admin console, permissioned access, CAS API, team management, branded UI, 99.9% SLA</td><td>Product</td><td><span class="rbadge rbadge-pending">Pending</span></td></tr>
+      <tr><td>Lark Grid Product Guide</td><td>For Developers/WealthTech. SDK + API stack, live in 24 hrs, ₹25,000/month. Web + mobile SDKs, webhooks, custom workflows, hosted portal, event-driven architecture</td><td>Product</td><td><span class="rbadge rbadge-pending">Pending</span></td></tr>
+      <tr><td>Lark OS Product Guide</td><td>For Enterprises. On-premise/hybrid, custom pricing, 99.99% SLA, 24/7 support, custom module development, dedicated engineering team</td><td>Product</td><td><span class="rbadge rbadge-pending">Pending</span></td></tr>
+      <tr><td>Product Comparison &amp; Pricing Table</td><td>Edge vs Vault vs Grid vs OS — features, monthly price, go-live time, support SLA, loan cap, analytics level, free trial (30 days), suspension policy, GST terms</td><td>Business Team</td><td><span class="rbadge rbadge-pending">Pending</span></td></tr>
+    </tbody>
+  </table>
+
+  <!-- SECTION 3 -->
+  <div class="rag-section-title"><div class="rag-sec-num">3</div><div class="rag-sec-label">How the Technology Works <span>7 documents</span></div></div>
+  <table class="rag-table">
+    <thead><tr><th>Document Name</th><th>What It Must Cover</th><th>Owner</th><th>Status</th></tr></thead>
+    <tbody>
+      <tr><td>LAS Engine Technical Overview</td><td>Full pipeline: Eligibility → Loan Offer → KYC → MF Pledging → E-Mandate → E-Sign. Processing ~3 min. API latency 89ms. 99.99% uptime. TPS rate.</td><td>Tech Team</td><td><span class="rbadge rbadge-pending">Pending</span></td></tr>
+      <tr><td>Digital Loan Journey — Step by Step</td><td>OTP login → portfolio fetch (CAMS/KFINTECH) → eligibility check → offer generation → KYC (DigiLocker) → pledging (OTP) → e-mandate → OD creation → disbursal. Timelines at each step.</td><td>Ops + Tech</td><td><span class="rbadge rbadge-pending">Pending</span></td></tr>
+      <tr><td>CAMS &amp; KFINTECH RTA Integration Guide</td><td>How portfolio is fetched from both RTAs, what happens if only one RTA fetched, mobile/email match requirement, common errors and resolution</td><td>Tech Team</td><td><span class="rbadge rbadge-pending">Pending</span></td></tr>
+      <tr><td>DigiLocker KYC Process Guide</td><td>Aadhaar-based e-KYC flow, PIN setup, common failures (Aadhaar not linked to mobile), how to fix via UIDAI verification</td><td>Ops Team</td><td><span class="rbadge rbadge-pending">Pending</span></td></tr>
+      <tr><td>OTP-Based Pledging Process Guide</td><td>How mutual fund lien is marked digitally via CAMS/KFINTECH OTP, what lodgement means, activation timeline, common OTP failures</td><td>Ops Team</td><td><span class="rbadge rbadge-pending">Pending</span></td></tr>
+      <tr><td>E-Mandate Setup Guide</td><td>How auto-debit is registered, supported banks, debit dates (7th/21st), failure handling, re-attempt process, UPI not supported explanation</td><td>Ops Team</td><td><span class="rbadge rbadge-pending">Pending</span></td></tr>
+      <tr><td>Lodgement &amp; OD Activation Guide</td><td>What happens after pledge — RTA lodgement steps, OD account creation, activation timeline (2-3 hrs), ops monitoring, common delays and escalation</td><td>Ops Team</td><td><span class="rbadge rbadge-pending">Pending</span></td></tr>
+    </tbody>
+  </table>
+
+  <!-- SECTION 4 -->
+  <div class="rag-section-title"><div class="rag-sec-num">4</div><div class="rag-sec-label">API &amp; SDK Reference <span>7 documents</span></div></div>
+  <table class="rag-table">
+    <thead><tr><th>Document Name</th><th>What It Must Cover</th><th>Owner</th><th>Status</th></tr></thead>
+    <tbody>
+      <tr><td>CAS API Reference</td><td>Base URL, endpoints: init session, fetch portfolio, verify OTP, get offers. Request params, headers (X-SDK-Key, X-SDK-Secret), response formats, error codes</td><td>Tech Team</td><td><span class="rbadge rbadge-pending">Pending</span></td></tr>
+      <tr><td>Lark OS API Reference</td><td>All endpoints: loan-sdk flow, loan-origination (KYC BFL, vKYC, pledge OTP, opportunity submission), loan-management (disbursement, repayment, foreclosure, shortfall, SOA, holding statement)</td><td>Tech Team</td><td><span class="rbadge rbadge-pending">Pending</span></td></tr>
+      <tr><td>Data API Reference</td><td>Base URL: sdk-backend.larkfinserv.com. User management, portfolio &amp; eligibility, loan operations — all endpoints with request/response examples</td><td>Tech Team</td><td><span class="rbadge rbadge-pending">Pending</span></td></tr>
+      <tr><td>CGS API — Capital Gains Statement</td><td>MF Central flow: initiate request → validate OTP → download PDF. Use case: tax reporting. Params and response schema.</td><td>Tech Team</td><td><span class="rbadge rbadge-pending">Pending</span></td></tr>
+      <tr><td>NPM SDK Guide (lark-sdk-multi)</td><td>Installation, VITE_ env variables (SDK_KEY, SDK_SECRET, PARTNER_ID, API_URL), quick start with LoanEligibilitySDK initialization</td><td>Tech Team</td><td><span class="rbadge rbadge-pending">Pending</span></td></tr>
+      <tr><td>Flutter SDK Guide</td><td>pubspec.yaml install (v0.0.3), PartnerConfig initialization, openEligibilityCheck, SDKMode options, sandbox vs production</td><td>Tech Team</td><td><span class="rbadge rbadge-pending">Pending</span></td></tr>
+      <tr><td>Webhook &amp; Sandbox Guide</td><td>Event-driven architecture, webhook setup in Grid, loan event types, sandbox access, test credentials, what can be tested</td><td>Tech Team</td><td><span class="rbadge rbadge-pending">Pending</span></td></tr>
+    </tbody>
+  </table>
+
+  <!-- SECTION 5 -->
+  <div class="rag-section-title"><div class="rag-sec-num">5</div><div class="rag-sec-label">Admin Portal <span>6 documents</span></div></div>
+  <table class="rag-table">
+    <thead><tr><th>Document Name</th><th>What It Must Cover</th><th>Owner</th><th>Status</th></tr></thead>
+    <tbody>
+      <tr><td>Admin Portal Overview</td><td>What the admin portal is, who uses it, main sections: user management, loan monitoring, partner management, knowledge base, analytics, configuration</td><td>Product</td><td><span class="rbadge rbadge-pending">Pending</span></td></tr>
+      <tr><td>Admin Roles &amp; Permissions Guide</td><td>Role types (Super Admin, Admin, Manager, Staff), what each can view/edit/approve, how to assign and revoke roles, SSO setup</td><td>Tech Team</td><td><span class="rbadge rbadge-pending">Pending</span></td></tr>
+      <tr><td>Loan Application Monitoring Guide</td><td>How to track applications in real-time, identify stuck applications (&gt;10 min at a stage), drop-off point analysis, how to intervene</td><td>Ops Team</td><td><span class="rbadge rbadge-pending">Pending</span></td></tr>
+      <tr><td>Knowledge Base Upload Guide (LISA)</td><td>How to upload PDF/DOCX for LISA, supported formats, file naming convention, ingestion trigger, index rebuild time (~5 min), version control</td><td>Ops + Tech</td><td><span class="rbadge rbadge-pending">Pending</span></td></tr>
+      <tr><td>Analytics Dashboard Guide</td><td>How to read dashboard — top queries, resolution rate, unanswered questions, department breakdown, usage trends, avg response time</td><td>Ops Team</td><td><span class="rbadge rbadge-pending">Pending</span></td></tr>
+      <tr><td>White-Label &amp; Partner Configuration</td><td>How to set up branded portal (logo, colors, domain), generate white-label link, approve new partners, configure own ARN/lender code</td><td>Product</td><td><span class="rbadge rbadge-pending">Pending</span></td></tr>
+    </tbody>
+  </table>
+
+  <!-- SECTION 6 -->
+  <div class="rag-section-title"><div class="rag-sec-num">6</div><div class="rag-sec-label">Partner Portal <span>6 documents</span></div></div>
+  <table class="rag-table">
+    <thead><tr><th>Document Name</th><th>What It Must Cover</th><th>Owner</th><th>Status</th></tr></thead>
+    <tbody>
+      <tr><td>Partner Portal Overview</td><td>What partners can see and do — loan pipeline dashboard, customer status, earnings tracker, white-label link, team management, support</td><td>Product</td><td><span class="rbadge rbadge-pending">Pending</span></td></tr>
+      <tr><td>Partner Onboarding Guide</td><td>Registration → verification call (within 24 hrs) → agreement signing → portal access → white-label link → training session → first 5 applications monitoring</td><td>Ops Team</td><td><span class="rbadge rbadge-pending">Pending</span></td></tr>
+      <tr><td>Partner Dashboard Guide</td><td>How to read loan pipeline, track conversion rates, view customer application status, download reports, navigate sub-sections</td><td>Product</td><td><span class="rbadge rbadge-pending">Pending</span></td></tr>
+      <tr><td>Earnings &amp; Payout Guide</td><td>How trail income is calculated, NIM sharing structure, how to read payout reports, quarterly settlement cycle, how to raise payout discrepancy</td><td>Business Team</td><td><span class="rbadge rbadge-pending">Pending</span></td></tr>
+      <tr><td>Partner Team Management Guide</td><td>How partner admin adds sub-users, assigns permissions, manages team access, contact Lark admin if role issues arise</td><td>Product</td><td><span class="rbadge rbadge-pending">Pending</span></td></tr>
+      <tr><td>Partner Support &amp; Escalation Guide</td><td>How to raise issues, SLA for response, Lark support contacts, white-label link issues, payout dispute process, temporary pause of partnership</td><td>Ops Team</td><td><span class="rbadge rbadge-pending">Pending</span></td></tr>
+    </tbody>
+  </table>
+
+  <!-- SECTION 7 -->
+  <div class="rag-section-title"><div class="rag-sec-num">7</div><div class="rag-sec-label">Lender Details &amp; Loan Operations <span>4 documents</span></div></div>
+  <table class="rag-table">
+    <thead><tr><th>Document Name</th><th>What It Must Cover</th><th>Owner</th><th>Status</th></tr></thead>
+    <tbody>
+      <tr><td>Lender Comparison Sheet</td><td>All 7 lenders: DSP Finance, Bajaj Finserv, ABFL, TATA Capital, Jio Credit, SMFG, Anand Rathi. For each: interest rate, processing fee, process type, min/max ticket, eligible entities, LTV, TAT</td><td>Ops Manager</td><td><span class="rbadge rbadge-pending">Pending</span></td></tr>
+      <tr><td>Digital Journey SOP (LAMF)</td><td>Ops team role in 100% digital cases — monitoring, real-time intervention triggers (&gt;10 min stuck), screen sharing, post-sanction support, tools used</td><td>Ops Team</td><td><span class="rbadge rbadge-pending">Pending</span></td></tr>
+      <tr><td>Phygital / Offline Journey SOP</td><td>End-to-end ops coordination — eligibility, document checklist per entity, lender submission, sanction tracking, courier coordination, pledge execution, disbursal, post-disbursal handoff</td><td>Ops Team</td><td><span class="rbadge rbadge-pending">Pending</span></td></tr>
+      <tr><td>LAS (Loan Against Shares) SOP</td><td>Demat share pledge, NSDL/CDSL process, margin call monitoring, invocation, corporate actions (dividends, voting rights), LAS-specific risks</td><td>Ops Team</td><td><span class="rbadge rbadge-pending">Pending</span></td></tr>
+    </tbody>
+  </table>
+
+  <!-- SECTION 8 -->
+  <div class="rag-section-title"><div class="rag-sec-num">8</div><div class="rag-sec-label">Loan Servicing SOPs <span>3 documents</span></div></div>
+  <table class="rag-table">
+    <thead><tr><th>Document Name</th><th>What It Must Cover</th><th>Owner</th><th>Status</th></tr></thead>
+    <tbody>
+      <tr><td>Withdrawal &amp; Enhancement SOP</td><td>Digital withdrawal (app-based, 10-30 min), offline withdrawal (email format, CC Lark Ops), enhancement via portfolio appreciation, additional pledge process, timelines, common issues</td><td>Ops Team</td><td><span class="rbadge rbadge-pending">Pending</span></td></tr>
+      <tr><td>Repayment &amp; Foreclosure SOP</td><td>Interest auto-debit (7th/21st, daily balance calculation with example), principal repayment (NEFT/RTGS, lien release 24-48 hrs), foreclosure steps (digital + offline), closure letter process</td><td>Ops Team</td><td><span class="rbadge rbadge-pending">Pending</span></td></tr>
+      <tr><td>Margin Shortfall &amp; Invocation SOP</td><td>Alert from lender → notify customer (email + WhatsApp + call) → 3 options explained → cure period tracking → invocation trigger → forced sale coordination → post-sale settlement</td><td>Ops Team</td><td><span class="rbadge rbadge-pending">Pending</span></td></tr>
+    </tbody>
+  </table>
+
+  <!-- SECTION 9 -->
+  <div class="rag-section-title"><div class="rag-sec-num">9</div><div class="rag-sec-label">Securities, LTV &amp; Troubleshooting <span>5 documents</span></div></div>
+  <table class="rag-table">
+    <thead><tr><th>Document Name</th><th>What It Must Cover</th><th>Owner</th><th>Status</th></tr></thead>
+    <tbody>
+      <tr><td>Supported Securities &amp; LTV Guide</td><td>Supported MFs (Equity, Debt, Hybrid, Index, Liquid), NOT supported (ELSS, Retirement, Child Gift). Demat shares (NSDL/CDSL), ETFs, bonds, govt securities, crypto not supported. LTV per asset class.</td><td>Product + Ops</td><td><span class="rbadge rbadge-pending">Pending</span></td></tr>
+      <tr><td>Loan End-Use Restrictions</td><td>What loan CANNOT be used for — speculative trading, crypto, margin funding. How to explain to customers. Lender monitoring of fund use.</td><td>Compliance</td><td><span class="rbadge rbadge-pending">Pending</span></td></tr>
+      <tr><td>Digital Journey Troubleshooting Guide</td><td>OTP not received, DigiLocker failure, portfolio incomplete fetch, e-mandate failure, selfie issues, bank selection error, CAMS vs KFINTECH mismatch — cause + resolution for each</td><td>Ops Team</td><td><span class="rbadge rbadge-pending">Pending</span></td></tr>
+      <tr><td>Disbursal &amp; Repayment Troubleshooting</td><td>OD not activated, wrong account credited, lender not responding, lien not released after repayment, e-mandate bounce handling, UPI not supported</td><td>Ops Team</td><td><span class="rbadge rbadge-pending">Pending</span></td></tr>
+      <tr><td>Top 50 Operations FAQs</td><td>All 50 Q&amp;A from Operations Manual — customer journey, disbursal, repayment, lender coordination, partner issues, system issues, compliance, product-specific, escalation scenarios</td><td>Ops Team</td><td><span class="rbadge rbadge-draft">Draft Ready</span></td></tr>
+    </tbody>
+  </table>
+
+  <!-- SECTION 10 -->
+  <div class="rag-section-title"><div class="rag-sec-num">10</div><div class="rag-sec-label">Compliance, Legal &amp; Grievance <span>5 documents</span></div></div>
+  <table class="rag-table">
+    <thead><tr><th>Document Name</th><th>What It Must Cover</th><th>Owner</th><th>Status</th></tr></thead>
+    <tbody>
+      <tr><td>KYC &amp; AML Procedure Manual</td><td>DigiLocker-based KYC, PAN/Aadhaar verification, entity-wise KYC requirements, PMLA obligations, prohibited customer types, suspicious transaction reporting</td><td>Compliance</td><td><span class="rbadge rbadge-pending">Pending</span></td></tr>
+      <tr><td>RBI Digital Lending Guidelines Summary</td><td>DLG September 2022 — what it means for Lark, LSP obligations, consent requirements, fair practices code, customer data norms</td><td>Compliance</td><td><span class="rbadge rbadge-pending">Pending</span></td></tr>
+      <tr><td>Data Privacy &amp; DPDP Policy</td><td>DPDP Act 2023 compliance, what data Lark collects, how it is used, consent withdrawal process, data retention policy, third-party sharing rules</td><td>Compliance + Legal</td><td><span class="rbadge rbadge-pending">Pending</span></td></tr>
+      <tr><td>Grievance Redressal Process</td><td>3-level escalation: Level 1 (Ops team, 2 hr ack), Level 2 (grievance.officer@larkfinserv.com, 3 working days), Level 3 (Vinita.kumari@larkfinserv.com, 3 working days). Ticket lifecycle.</td><td>Ops Manager</td><td><span class="rbadge rbadge-pending">Pending</span></td></tr>
+      <tr><td>Incident Response &amp; Escalation Matrix</td><td>Data breach protocol, system failure steps, legal threat handling, media inquiry procedure, internal escalation contacts, lender escalation contacts per lender</td><td>Compliance + Tech</td><td><span class="rbadge rbadge-pending">Pending</span></td></tr>
+    </tbody>
+  </table>
+
+  <!-- PRIORITY TABLE -->
+  <h3 style="margin-top:40px;margin-bottom:14px;">Upload Priority Order</h3>
+  <div class="tbl-wrap priority-section">
+    <table class="rag-table">
+      <thead><tr><th>Priority</th><th>Category</th><th>Documents</th><th>Why First</th><th>Target</th></tr></thead>
+      <tbody>
+        <tr class="prow-p1"><td style="font-weight:700;color:#DC2626;text-align:center;">P1</td><td>Products</td><td>Edge, Vault, Grid, OS guides + Pricing table</td><td>Most queried by partners and new staff every day</td><td>Week 1</td></tr>
+        <tr class="prow-p1"><td style="font-weight:700;color:#DC2626;text-align:center;">P1</td><td>Digital Journey</td><td>Digital Journey SOP + Troubleshooting guide</td><td>Ops team uses this for every live digital case</td><td>Week 1</td></tr>
+        <tr class="prow-p1"><td style="font-weight:700;color:#DC2626;text-align:center;">P1</td><td>Top 50 FAQs</td><td>Operations FAQ document</td><td>Covers 80% of repetitive queries instantly</td><td>Week 1</td></tr>
+        <tr class="prow-p2"><td style="font-weight:700;color:#B45309;text-align:center;">P2</td><td>Lender Details</td><td>Lender comparison sheet + Offline journey SOP</td><td>Required for all phygital and offline case handling</td><td>Week 2</td></tr>
+        <tr class="prow-p2"><td style="font-weight:700;color:#B45309;text-align:center;">P2</td><td>Loan Servicing</td><td>Withdrawal, Repayment, Foreclosure SOPs</td><td>Daily servicing queries from customers and partners</td><td>Week 2</td></tr>
+        <tr class="prow-p2"><td style="font-weight:700;color:#B45309;text-align:center;">P2</td><td>API &amp; SDK</td><td>CAS API, Lark OS API, NPM SDK, Flutter SDK</td><td>Developer and integration team queries</td><td>Week 2</td></tr>
+        <tr class="prow-p3"><td style="font-weight:700;color:#1D4ED8;text-align:center;">P3</td><td>Admin &amp; Partner Portal</td><td>All portal guides (admin + partner)</td><td>Internal onboarding and training use</td><td>Week 3</td></tr>
+        <tr class="prow-p3"><td style="font-weight:700;color:#1D4ED8;text-align:center;">P3</td><td>Securities &amp; LTV</td><td>Supported securities guide + LTV ratios</td><td>Product eligibility queries</td><td>Week 3</td></tr>
+        <tr class="prow-p3"><td style="font-weight:700;color:#1D4ED8;text-align:center;">P3</td><td>Compliance &amp; Legal</td><td>KYC, RBI, DPDP, Grievance docs</td><td>Compliance and audit queries</td><td>Week 3</td></tr>
+        <tr class="prow-p3"><td style="font-weight:700;color:#1D4ED8;text-align:center;">P3</td><td>Company &amp; Tech</td><td>Company overview, tech pipeline docs</td><td>Background context and new staff onboarding</td><td>Week 3</td></tr>
+      </tbody>
+    </table>
+  </div>
 </div>
 
 <div class="divider"></div>
