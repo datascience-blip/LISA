@@ -1,0 +1,2227 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>LISA: Documentation | Lark Finserv</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --blue: #0066FF;
+  --purple: #6B21A8;
+  --indigo: #4F46E5;
+  --sidebar-w: 260px;
+  --g50: #F9FAFB;
+  --g100: #F3F4F6;
+  --g200: #E5E7EB;
+  --g300: #D1D5DB;
+  --g400: #9CA3AF;
+  --g500: #6B7280;
+  --g700: #374151;
+  --g800: #1F2937;
+  --g900: #111827;
+}
+
+/* ─── Sidebar collapsed state ─── */
+body.sidebar-hidden .sidebar { transform: translateX(-100%); }
+body.sidebar-hidden .main { margin-left: 0; }
+body.sidebar-hidden #progress { left: 0; }
+body.sidebar-hidden .toggle-btn { left: 16px; background: white; border: 1px solid var(--g200); color: var(--g700); box-shadow: 0 2px 8px rgba(0,0,0,0.1); }
+body.sidebar-hidden .toggle-btn:hover { background: var(--g50); }
+
+* { margin:0; padding:0; box-sizing:border-box; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: 'Inter', sans-serif;
+  background: #F8FAFF;
+  color: var(--g900);
+  font-size: 15px;
+  line-height: 1.75;
+}
+
+/* ─── Toggle button ─── */
+.toggle-btn {
+  position: fixed;
+  top: 20px;
+  left: calc(var(--sidebar-w) - 14px);
+  z-index: 200;
+  width: 28px; height: 28px;
+  background: white;
+  border: 1px solid var(--g200);
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  cursor: pointer;
+  font-size: 12px;
+  color: var(--g400);
+  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+  transition: all 0.2s;
+  user-select: none;
+}
+
+.toggle-btn:hover { color: var(--blue); border-color: #93C5FD; box-shadow: 0 2px 12px rgba(0,102,255,0.15); }
+
+/* ─── SIDEBAR ─── */
+.sidebar {
+  position: fixed;
+  top: 0; left: 0;
+  width: var(--sidebar-w);
+  height: 100vh;
+  background: #FAFBFF;
+  border-right: 1px solid #E8EEFF;
+  overflow-y: auto;
+  z-index: 50;
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.25s ease;
+  box-shadow: 4px 0 24px rgba(0,102,255,0.06);
+}
+
+.sidebar::-webkit-scrollbar { width: 3px; }
+.sidebar::-webkit-scrollbar-thumb { background: #DBEAFE; border-radius: 4px; }
+
+.sidebar-logo {
+  padding: 0;
+  flex-shrink: 0;
+  background: linear-gradient(135deg, #0050CC 0%, #4338CA 50%, #6B21A8 100%);
+  position: relative;
+  overflow: hidden;
+}
+
+.sidebar-logo::after {
+  content: '';
+  position: absolute;
+  bottom: -30px; right: -30px;
+  width: 100px; height: 100px;
+  background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
+  border-radius: 50%;
+  pointer-events: none;
+}
+
+.sidebar-logo-inner {
+  padding: 20px 18px 16px;
+  position: relative;
+  z-index: 1;
+}
+
+.logo-mark {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 6px;
+}
+
+.logo-icon {
+  width: 34px; height: 34px;
+  background: rgba(255,255,255,0.2);
+  border: 1px solid rgba(255,255,255,0.3);
+  border-radius: 9px;
+  display: flex; align-items: center; justify-content: center;
+  font-weight: 800; font-size: 14px; color: white;
+  backdrop-filter: blur(4px);
+}
+
+.logo-text { font-weight: 700; font-size: 16px; color: white; letter-spacing: -0.3px; }
+.logo-sub { font-size: 11px; color: rgba(255,255,255,0.55); margin-top: 2px; }
+
+
+
+
+
+.sidebar-nav { padding: 10px 0 16px; flex: 1; }
+
+.nav-group { margin-bottom: 2px; }
+
+.nav-group-label {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 1.8px;
+  text-transform: uppercase;
+  color: #A5B4FC;
+  padding: 12px 18px 4px;
+}
+
+.nav-link {
+  display: flex;
+  align-items: center;
+  padding: 7px 16px 7px 18px;
+  font-size: 13px;
+  font-weight: 500;
+  color: #64748B;
+  text-decoration: none;
+  border-left: 2px solid transparent;
+  transition: all 0.15s ease !important;
+  cursor: pointer;
+  border-radius: 0 8px 8px 0;
+  margin-right: 10px;
+  position: relative;
+}
+
+.nav-link:hover {
+  color: #0066FF;
+  background: #EEF4FF;
+  border-left-color: #93C5FD;
+  padding-left: 22px !important;
+}
+
+.nav-link.active {
+  color: #0050CC;
+  background: linear-gradient(90deg, #EEF4FF, #F5F0FF);
+  border-left-color: #0066FF;
+  font-weight: 600;
+  padding-left: 22px !important;
+}
+
+.nav-link.active::after {
+  content: '';
+  position: absolute;
+  right: 10px; top: 50%;
+  transform: translateY(-50%);
+  width: 5px; height: 5px;
+  background: #0066FF;
+  border-radius: 50%;
+  opacity: 0.5;
+}
+
+
+/* ─── MAIN CONTENT ─── */
+.main {
+  margin-left: var(--sidebar-w);
+  min-height: 100vh;
+  transition: margin-left 0.25s ease;
+  background: #F8FAFF;
+}
+
+/* ─── HERO ─── */
+.hero {
+  background: linear-gradient(135deg, #003DB5 0%, #3730A3 40%, #5B21B6 100%);
+  padding: 88px 72px 84px;
+  position: relative;
+  overflow: hidden;
+}
+
+.hero-eyebrow {
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  color: rgba(255,255,255,0.85);
+  margin-bottom: 20px;
+  display: inline-flex;
+}
+
+.hero h1 {
+  font-size: 56px;
+  font-weight: 800;
+  color: white;
+  line-height: 1.05;
+  letter-spacing: -1.5px;
+  margin-bottom: 16px;
+}
+
+.hero h1 em {
+  font-style: normal;
+  background: linear-gradient(90deg, #FCD34D, #FBBF24);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.hero-desc {
+  font-size: 17px;
+  color: rgba(255,255,255,0.75);
+  max-width: 520px;
+  margin-bottom: 36px;
+  line-height: 1.65;
+}
+
+.hero-chips {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.chip {
+  background: rgba(255,255,255,0.12);
+  border: 1px solid rgba(255,255,255,0.2);
+  color: white;
+  font-size: 12px;
+  font-weight: 600;
+  padding: 6px 14px;
+  border-radius: 999px;
+}
+
+/* ─── CONTENT SECTIONS ─── */
+.content { padding: 0 64px 120px; background: #F8FAFF; }
+
+/* scroll-target offset */
+.anchor { scroll-margin-top: 40px; }
+
+/* ─── Section header ─── */
+.section-header {
+  padding: 60px 0 0;
+  margin-bottom: 28px;
+  border-bottom: 1px solid var(--g200);
+  padding-bottom: 20px;
+}
+
+.section-header .eyebrow {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 2.5px;
+  text-transform: uppercase;
+  background: linear-gradient(90deg, #0066FF, #6B21A8);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  margin-bottom: 8px;
+  display: inline-block;
+}
+
+.section-header h2 {
+  font-size: 28px;
+  font-weight: 800;
+  color: var(--g900);
+  letter-spacing: -0.5px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  line-height: 1.2;
+  padding-bottom: 16px;
+  border-bottom: 1px solid #EEF2FF;
+  position: relative;
+  margin-bottom: 10px;
+}
+
+.section-header h2::after {
+  content: '';
+  position: absolute;
+  bottom: -1px; left: 0;
+  width: 44px; height: 2px;
+  background: linear-gradient(90deg, #0066FF, #6B21A8);
+  border-radius: 2px;
+}
+
+.section-header h2 .ico { font-size: 26px; }
+
+.section-header p {
+  font-size: 15px;
+  color: var(--g500);
+  margin-top: 8px;
+  max-width: 680px;
+}
+
+/* ─── Subsection ─── */
+h3 {
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--g900);
+  margin: 36px 0 12px;
+  padding: 8px 14px;
+  background: linear-gradient(90deg, #EEF4FF, transparent);
+  border-left: 3px solid var(--blue);
+  border-radius: 0 8px 8px 0;
+}
+
+h4 {
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--g700);
+  margin: 24px 0 8px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+p { margin-bottom: 14px; color: var(--g700); line-height: 1.75; }
+ul, ol { padding-left: 22px; margin-bottom: 16px; color: var(--g700); }
+li { margin-bottom: 7px; }
+li strong, strong { color: var(--g900); font-weight: 600; }
+
+/* ─── Cards ─── */
+.card {
+  background: #FAFBFF;
+  border: 1px solid #E8EEFF;
+  border-radius: 14px;
+  padding: 24px 28px;
+  margin-bottom: 16px;
+}
+
+.card-row {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 14px;
+  margin: 16px 0;
+}
+
+.card-row-3 {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 14px;
+  margin: 16px 0;
+}
+
+.card-row-4 {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 12px;
+  margin: 16px 0;
+}
+
+.feat-card {
+  background: white;
+  border: 1px solid #E8EEFF;
+  border-radius: 14px;
+  padding: 22px;
+  transition: box-shadow 0.2s, border-color 0.2s;
+}
+
+.feat-card:hover {
+  box-shadow: 0 4px 20px rgba(0,102,255,0.08);
+  border-color: #BFDBFE;
+}
+
+.feat-card .ficon { font-size: 26px; margin-bottom: 10px; }
+.feat-card .ftitle { font-size: 14px; font-weight: 700; color: var(--g900); margin-bottom: 5px; }
+.feat-card .fdesc { font-size: 13px; color: var(--g500); line-height: 1.55; }
+
+/* ─── Stat row ─── */
+.stats {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 12px;
+  margin: 20px 0;
+}
+
+.stat {
+  background: white;
+  border: 1px solid #E8EEFF;
+  border-radius: 14px;
+  padding: 20px 16px;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.stat::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, #0066FF, #6B21A8);
+  border-radius: 2px 2px 0 0;
+}
+
+.stat .val {
+  font-size: 26px;
+  font-weight: 800;
+  background: linear-gradient(135deg, #0066FF, #6B21A8);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  line-height: 1.1;
+}
+
+.stat .lbl { font-size: 11px; color: var(--g400); margin-top: 4px; font-weight: 500; }
+
+/* ─── Highlight box ─── */
+.highlight {
+  background: linear-gradient(135deg, #EEF4FF 0%, #F0EEFF 100%);
+  border: 1px solid #C7D2FE;
+  border-left: 4px solid var(--blue);
+  border-radius: 0 14px 14px 0;
+  padding: 16px 20px;
+  margin: 16px 0 22px;
+  font-size: 14px;
+  color: #1E3A8A;
+  line-height: 1.75;
+  box-shadow: 0 2px 12px rgba(0,102,255,0.06);
+}
+
+.highlight strong { color: #1D4ED8; }
+
+.warn-box {
+  background: linear-gradient(135deg, #FFFBEB, #FFF9E6);
+  border: 1px solid #FDE68A;
+  border-left: 4px solid #F59E0B;
+  border-radius: 0 14px 14px 0;
+  padding: 14px 18px;
+  margin: 14px 0 20px;
+  font-size: 13.5px;
+  color: #78350F;
+  box-shadow: 0 2px 10px rgba(245,158,11,0.08);
+}
+
+/* ─── Table ─── */
+.tbl-wrap {
+  overflow: hidden;
+  border-radius: 14px;
+  border: 1px solid #E0E8FF;
+  margin: 14px 0 28px;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.04);
+}
+
+table { width: 100%; border-collapse: collapse; font-size: 14px; }
+thead tr { background: linear-gradient(90deg, #0050CC, #4338CA, #5B21B6); color: white; }
+thead th { padding: 12px 16px; text-align: left; font-size: 11px; font-weight: 700; letter-spacing: 0.8px; text-transform: uppercase; white-space: nowrap; }
+tbody tr { background: white; border-bottom: 1px solid #F3F4F6; transition: background 0.12s; }
+tbody tr:last-child { border-bottom: none; }
+tbody tr:nth-child(even) { background: #FAFAFA; }
+tbody tr:hover { background: #EEF4FF; }
+tbody td { padding: 11px 16px; color: var(--g700); vertical-align: top; }
+tbody td:first-child { font-weight: 600; color: var(--g900); }
+
+/* ─── Code ─── */
+pre {
+  background: #0D1117;
+  color: #C9D1D9;
+  border-radius: 12px;
+  padding: 20px 22px;
+  overflow-x: auto;
+  margin: 14px 0 24px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 12.5px;
+  line-height: 1.8;
+  border-top: 3px solid #0066FF;
+  position: relative;
+}
+
+.pre-label {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: #4B5563;
+  margin-bottom: 6px;
+  font-family: 'Inter', sans-serif;
+}
+
+code {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 12.5px;
+  background: #EFF6FF;
+  color: #1D4ED8;
+  padding: 2px 7px;
+  border-radius: 4px;
+}
+
+pre code { background: none; color: #C9D1D9; padding: 0; }
+
+/* ─── Pills ─── */
+.pill { display: inline-block; padding: 2px 10px; border-radius: 999px; font-size: 11px; font-weight: 700; }
+.pb { background: #DBEAFE; color: #1D4ED8; }
+.pp { background: #EDE9FE; color: #6D28D9; }
+.pg { background: #D1FAE5; color: #065F46; }
+.po { background: #FEF3C7; color: #92400E; }
+.pr { background: #FEE2E2; color: #991B1B; }
+.pgr { background: #F3F4F6; color: #374151; }
+
+/* ─── Steps ─── */
+.steps { margin: 20px 0; }
+
+.step {
+  display: flex;
+  gap: 16px;
+  position: relative;
+  padding-bottom: 28px;
+}
+
+.step:not(:last-child)::after {
+  content: '';
+  position: absolute;
+  left: 15px; top: 38px; bottom: 0;
+  width: 2px;
+  background: linear-gradient(180deg, #BFDBFE, #DDD6FE, transparent);
+}
+
+.snum {
+  width: 34px; height: 34px; min-width: 34px;
+  background: linear-gradient(135deg, #0050CC, #5B21B6);
+  color: white; border-radius: 50%;
+  font-size: 13px; font-weight: 700;
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0; margin-top: 2px;
+  box-shadow: 0 4px 12px rgba(0,80,204,0.3);
+}
+
+.sbody .stitle { font-size: 15px; font-weight: 700; color: var(--g900); margin-bottom: 3px; }
+.sbody .sdesc { font-size: 13.5px; color: var(--g500); line-height: 1.6; }
+
+/* ─── Flow nodes ─── */
+.flow { margin: 16px 0 28px; }
+
+.fnode {
+  background: white;
+  border: 1px solid var(--g200);
+  border-left: 4px solid transparent;
+  border-radius: 10px;
+  padding: 14px 18px;
+  display: flex;
+  gap: 14px;
+  align-items: flex-start;
+  transition: border-left-color 0.2s;
+}
+
+.fnode:hover { border-left-color: var(--blue); }
+
+.fnum {
+  width: 30px; height: 30px; min-width: 30px;
+  background: linear-gradient(135deg, #0050CC, #5B21B6);
+  color: white; border-radius: 8px;
+  font-size: 12px; font-weight: 700;
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0; margin-top: 1px;
+  box-shadow: 0 3px 10px rgba(0,80,204,0.25);
+}
+
+.fbody .ftit { font-size: 14px; font-weight: 700; color: var(--g900); margin-bottom: 3px; }
+.fbody .fdesc { font-size: 13px; color: var(--g500); line-height: 1.55; margin: 0; }
+
+.farrow { display: flex; justify-content: center; align-items: center; height: 24px; color: var(--g300); font-size: 18px; }
+
+/* ─── Checklist ─── */
+.checklist { list-style: none; padding: 0; margin: 12px 0; }
+.checklist li { display: flex; align-items: flex-start; gap: 10px; padding: 11px 0; border-bottom: 1px solid #EEF2FF; font-size: 14px; color: var(--g700); }
+.checklist li:last-child { border-bottom: none; }
+.ch-ok { color: #10B981; font-weight: 700; flex-shrink: 0; margin-top: 1px; }
+.ch-miss { color: #F59E0B; font-weight: 700; flex-shrink: 0; margin-top: 1px; }
+.ch-no { color: #EF4444; font-weight: 700; flex-shrink: 0; margin-top: 1px; }
+
+/* ─── Lender cards ─── */
+.lender-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; margin: 16px 0; }
+
+.lcard {
+  background: white;
+  border: 1px solid var(--g200);
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+.lcard-head {
+  padding: 14px 16px 10px;
+  background: linear-gradient(90deg, #EEF4FF, #F0EEFF);
+  border-bottom: 1px solid #E0E8FF;
+}
+
+.lcard-name { font-size: 14px; font-weight: 700; color: var(--g900); margin-bottom: 4px; }
+.lcard-body { padding: 12px 16px; font-size: 13px; }
+.lcard-body .row { display: flex; justify-content: space-between; padding: 4px 0; border-bottom: 1px solid var(--g100); }
+.lcard-body .row:last-child { border-bottom: none; }
+.lcard-body .k { color: var(--g500); font-weight: 500; }
+.lcard-body .v { color: var(--g900); font-weight: 600; text-align: right; }
+
+/* ─── Comparison table ─── */
+.compare {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+  margin: 16px 0;
+}
+
+.comp-card { border-radius: 12px; overflow: hidden; }
+
+.comp-head {
+  padding: 14px 18px;
+  font-size: 14px;
+  font-weight: 700;
+  color: white;
+}
+
+.comp-head.bad { background: #6B7280; }
+.comp-head.good { background: linear-gradient(135deg, #0050CC, #5B21B6); }
+
+.comp-body { background: white; border: 1px solid var(--g200); border-top: none; padding: 14px 18px; border-radius: 0 0 12px 12px; }
+.comp-body li { font-size: 13.5px; color: var(--g700); margin-bottom: 8px; }
+
+/* ─── Priority tags ─── */
+.p-h { color: #DC2626; font-weight: 700; font-size: 12px; }
+.p-m { color: #D97706; font-weight: 700; font-size: 12px; }
+.p-l { color: #059669; font-weight: 700; font-size: 12px; }
+
+/* ─── Divider ─── */
+.divider { height: 1px; background: linear-gradient(90deg, transparent, #DBEAFE, #E9D5FF, transparent); margin: 48px 0; }
+
+/* ─── Footer ─── */
+.footer {
+  background: linear-gradient(135deg, #050D1F, #0F0F2E);
+  color: #475569;
+  text-align: center;
+  padding: 36px 40px;
+  font-size: 13px;
+  border-top: 1px solid #1E2D4E;
+}
+.footer strong { color: #94A3B8; }
+.footer-logo {
+  font-size: 18px;
+  font-weight: 800;
+  background: linear-gradient(90deg, #60A5FA, #A78BFA);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  margin-bottom: 6px;
+}
+
+/* ─── Scroll progress ─── */
+#progress { position: fixed; top: 0; left: var(--sidebar-w); right: 0; height: 3px; background: linear-gradient(90deg, #0066FF, #6B21A8); transform-origin: left; transform: scaleX(0); z-index: 99; transition: transform 0.1s, left 0.25s; }
+
+/* ══════════════════════════════════════
+   ANIMATIONS & ENHANCEMENTS
+══════════════════════════════════════ */
+
+/* Scroll reveal */
+.reveal { opacity: 0; transform: translateY(20px); transition: opacity 0.55s ease, transform 0.55s ease; }
+.reveal.visible { opacity: 1; transform: translateY(0); }
+
+/* Stagger children */
+.reveal-group > * { opacity: 0; transform: translateY(16px); transition: opacity 0.5s ease, transform 0.5s ease; }
+.reveal-group.visible > *:nth-child(1) { opacity:1; transform:none; transition-delay:0s; }
+.reveal-group.visible > *:nth-child(2) { opacity:1; transform:none; transition-delay:0.1s; }
+.reveal-group.visible > *:nth-child(3) { opacity:1; transform:none; transition-delay:0.2s; }
+.reveal-group.visible > *:nth-child(4) { opacity:1; transform:none; transition-delay:0.3s; }
+.reveal-group.visible > *:nth-child(5) { opacity:1; transform:none; transition-delay:0.4s; }
+
+/* Hero fade in */
+@keyframes fadeUp { from { opacity:0; transform:translateY(22px); } to { opacity:1; transform:none; } }
+.hero-eyebrow { animation: fadeUp 0.55s ease 0.1s both; }
+.hero h1      { animation: fadeUp 0.6s ease 0.22s both; }
+.hero-desc    { animation: fadeUp 0.55s ease 0.36s both; }
+.hero-chips   { animation: fadeUp 0.55s ease 0.5s both; }
+
+/* Floating orbs */
+@keyframes orb1 { 0%,100%{ transform:translate(0,0); } 50%{ transform:translate(20px,-24px); } }
+@keyframes orb2 { 0%,100%{ transform:translate(0,0); } 50%{ transform:translate(-16px,18px); } }
+
+/* Gradient shimmer on progress */
+@keyframes shimmer { 0%{ background-position:-200% center; } 100%{ background-position:200% center; } }
+#progress { background: linear-gradient(90deg,#0066FF,#6B21A8,#0066FF) !important; background-size:200% 100% !important; animation: shimmer 2.5s linear infinite; }
+
+/* Card hover lift */
+.feat-card { transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease !important; }
+.feat-card:hover { transform: translateY(-5px) !important; box-shadow: 0 16px 36px rgba(0,102,255,0.13) !important; border-color:#BFDBFE !important; }
+
+/* Lender card hover */
+.lcard { transition: transform 0.2s ease, box-shadow 0.2s ease; }
+.lcard:hover { transform: translateY(-4px); box-shadow: 0 10px 28px rgba(0,102,255,0.1); }
+
+/* Flow node hover */
+.fnode { transition: border-left-color 0.2s, box-shadow 0.2s, transform 0.18s; }
+.fnode:hover { transform: translateX(5px); box-shadow: 0 4px 18px rgba(0,102,255,0.09); border-left-color: var(--blue) !important; }
+
+/* Step number glow */
+@keyframes stepGlow { 0%,100%{ box-shadow:0 0 0 0 rgba(0,102,255,0); } 50%{ box-shadow:0 0 0 7px rgba(0,102,255,0.12); } }
+.snum { animation: stepGlow 3.5s ease-in-out infinite; }
+
+/* Stat gradient animation */
+@keyframes gradMove { 0%,100%{ background-position:0% 50%; } 50%{ background-position:100% 50%; } }
+.stat .val { background-size:200% 200% !important; animation: gradMove 4s ease infinite; }
+
+/* Chip hover */
+.chip { transition: background 0.18s, transform 0.18s; cursor:default; }
+.chip:hover { background:rgba(255,255,255,0.25); transform:scale(1.05); }
+
+/* Nav link slide */
+.nav-link { transition: all 0.15s ease !important; }
+.nav-link:hover { padding-left: 24px !important; }
+.nav-link.active { padding-left: 24px !important; }
+
+/* Highlight box left border pulse */
+@keyframes borderPulse { 0%,100%{ border-left-color:#0066FF; } 50%{ border-left-color:#6B21A8; } }
+.highlight { animation: borderPulse 4s ease-in-out infinite; }
+
+/* Table row */
+tbody tr { transition: background 0.12s; }
+
+/* Stat card subtle border glow on hover */
+.stat:hover { background: #f0f7ff; transition: background 0.2s; }
+</style>
+</head>
+<body>
+
+<div id="progress"></div>
+
+<!-- Toggle button -->
+<button class="toggle-btn" id="toggleBtn" onclick="toggleSidebar()" title="Toggle sidebar">&#9776;</button>
+
+<!-- ═══ SIDEBAR ═══ -->
+<aside class="sidebar">
+  <div class="sidebar-logo">
+    <div class="sidebar-logo-inner">
+      <div class="logo-mark">
+        <div class="logo-icon">L</div>
+        <div>
+          <div class="logo-text">LISA</div>
+          <div class="logo-sub">Powered by Lark Finserv</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <nav class="sidebar-nav">
+
+    <div class="nav-group">
+      <div class="nav-group-label">Introduction</div>
+      <a class="nav-link active" onclick="goto('what-is-lisa')">What is LISA</a>
+      <a class="nav-link" onclick="goto('why-lisa')">Why LISA Exists</a>
+      <a class="nav-link" onclick="goto('how-it-works')">How It Works</a>
+    </div>
+
+    <div class="nav-group">
+      <div class="nav-group-label">Product</div>
+      <a class="nav-link" onclick="goto('product-suite')">Lark Product Suite</a>
+      <a class="nav-link" onclick="goto('lamf-las')">LAMF &amp; LAS</a>
+      <a class="nav-link" onclick="goto('loan-journey')">Loan Journey</a>
+    </div>
+
+    <div class="nav-group">
+      <div class="nav-group-label">Technical</div>
+      <a class="nav-link" onclick="goto('architecture')">Architecture</a>
+      <a class="nav-link" onclick="goto('rag-pipeline')">RAG Pipeline</a>
+      <a class="nav-link" onclick="goto('langgraph')">LangGraph Flow</a>
+      <a class="nav-link" onclick="goto('database')">Database</a>
+      <a class="nav-link" onclick="goto('api')">API Reference</a>
+      <a class="nav-link" onclick="goto('prompts')">LLM Prompts</a>
+      <a class="nav-link" onclick="goto('security')">Security</a>
+    </div>
+
+    <div class="nav-group">
+      <div class="nav-group-label">Operations</div>
+      <a class="nav-link" onclick="goto('lenders')">Lenders</a>
+      <a class="nav-link" onclick="goto('process-types')">Digital vs Phygital</a>
+      <a class="nav-link" onclick="goto('payouts')">Partner Payouts</a>
+      <a class="nav-link" onclick="goto('grievance')">Grievance &amp; Support</a>
+      <a class="nav-link" onclick="goto('compliance')">Compliance</a>
+    </div>
+
+    <div class="nav-group">
+      <div class="nav-group-label">Knowledge Base</div>
+      <a class="nav-link" onclick="goto('rag-docs')">What Docs LISA Needs</a>
+      <a class="nav-link" onclick="goto('doc-format')">How to Write Docs</a>
+    </div>
+
+    <div class="nav-group">
+      <div class="nav-group-label">Setup</div>
+      <a class="nav-link" onclick="goto('setup')">Fresh Setup</a>
+      <a class="nav-link" onclick="goto('add-docs')">Adding New Knowledge</a>
+      <a class="nav-link" onclick="goto('production')">Production Deployment</a>
+      <a class="nav-link" onclick="goto('troubleshoot')">Troubleshooting</a>
+      <a class="nav-link" onclick="goto('roadmap')">Roadmap</a>
+    </div>
+
+  </nav>
+</aside>
+
+<!-- ═══ MAIN ═══ -->
+<div class="main">
+
+<!-- HERO -->
+<div class="hero" style="position:relative; overflow:hidden;">
+  <!-- Animated background orbs -->
+  <div class="hero-orb1" style="position:absolute;top:-80px;right:-60px;width:380px;height:380px;background:radial-gradient(circle,rgba(255,255,255,0.08) 0%,transparent 70%);border-radius:50%;pointer-events:none;"></div>
+  <div class="hero-orb2" style="position:absolute;bottom:-100px;left:10%;width:280px;height:280px;background:radial-gradient(circle,rgba(251,191,36,0.1) 0%,transparent 70%);border-radius:50%;pointer-events:none;"></div>
+  <div class="hero-orb1" style="position:absolute;top:30%;left:-80px;width:220px;height:220px;background:radial-gradient(circle,rgba(139,92,246,0.12) 0%,transparent 70%);border-radius:50%;pointer-events:none;"></div>
+
+  <div style="position:relative;z-index:1;">
+    <div class="hero-eyebrow" style="display:inline-flex;align-items:center;gap:8px;background:rgba(255,255,255,0.1);border:1px solid rgba(255,255,255,0.2);padding:6px 14px;border-radius:999px;margin-bottom:20px;">
+      <span style="width:6px;height:6px;background:#4ADE80;border-radius:50%;display:inline-block;box-shadow:0 0 6px #4ADE80;"></span>
+      Lark Finserv &nbsp;/&nbsp; AI Platform Documentation
+    </div>
+    <h1>Meet <em>LISA</em></h1>
+    <p class="hero-desc">Lark Intelligent Support Assistant. The AI brain powering instant, accurate answers for every Lark Finserv partner around the clock.</p>
+    <div class="hero-chips">
+      <span class="chip">&#129302; GPT-4o-mini</span>
+      <span class="chip">&#128280; RAG + FAISS</span>
+      <span class="chip">&#128440; LangGraph</span>
+      <span class="chip">&#9889; ~1.5s latency</span>
+      <span class="chip">&#128274; Zero hallucination</span>
+    </div>
+  </div>
+</div>
+
+<div class="content">
+
+<!-- ════════════════════════════════════════════
+     WHAT IS LISA
+════════════════════════════════════════════ -->
+<div id="what-is-lisa" class="anchor">
+  <div class="section-header">
+    <div class="eyebrow">Introduction</div>
+    <h2><span class="ico">&#129302;</span> What is LISA?</h2>
+    <p>LISA is Lark Finserv's AI-powered support and knowledge assistant: built exclusively for MFD partners, wealth platforms, and internal teams.</p>
+  </div>
+
+  <div class="stats">
+    <div class="stat"><div class="val">24/7</div><div class="lbl">Always available</div></div>
+    <div class="stat"><div class="val">~1.5s</div><div class="lbl">Response time</div></div>
+    <div class="stat"><div class="val">3</div><div class="lbl">Intent modes</div></div>
+    <div class="stat"><div class="val">8+</div><div class="lbl">Knowledge docs</div></div>
+    <div class="stat"><div class="val">0</div><div class="lbl">Hallucinations</div></div>
+  </div>
+
+  <p>LISA handles three types of tasks for Lark Finserv's partner ecosystem:</p>
+
+  <div class="card-row-3">
+    <div class="feat-card">
+      <div class="ficon">&#128269;</div>
+      <div class="ftitle">Query Support</div>
+      <div class="fdesc">Answers product questions: LAMF/LAS rates, eligibility, lender comparisons, loan process. Reads from Lark's actual documents, never guesses.</div>
+    </div>
+    <div class="feat-card">
+      <div class="ficon">&#9997;</div>
+      <div class="ftitle">Content Generation</div>
+      <div class="fdesc">Writes WhatsApp messages, email pitches, and marketing content for MFDs: using your actual product numbers and scripts.</div>
+    </div>
+    <div class="feat-card">
+      <div class="ficon">&#128202;</div>
+      <div class="ftitle">Behaviour Discovery</div>
+      <div class="fdesc">Analyzes partner interaction patterns. What do MFDs ask most? What blockers exist? Surfaces insights from real usage data.</div>
+    </div>
+  </div>
+
+  <h3>Who uses LISA?</h3>
+  <div class="card-row">
+    <div class="feat-card">
+      <div class="ficon">&#128200;</div>
+      <div class="ftitle">MFD Partners (Mutual Fund Distributors)</div>
+      <div class="fdesc">Ask about LAMF eligibility, interest rates, loan journey. Get instant WhatsApp marketing content. No more calling support for standard questions.</div>
+    </div>
+    <div class="feat-card">
+      <div class="ficon">&#127963;</div>
+      <div class="ftitle">Wealth Platforms &amp; NBFCs</div>
+      <div class="fdesc">LAS product details, lender-specific processes, payout structures. Integration support and operational FAQs answered instantly.</div>
+    </div>
+    <div class="feat-card">
+      <div class="ficon">&#128203;</div>
+      <div class="ftitle">Internal Lark Team</div>
+      <div class="fdesc">Instantly retrieve product FAQs, partner data, and loan journey steps without searching through Google Docs or Notion.</div>
+    </div>
+    <div class="feat-card">
+      <div class="ficon">&#128179;</div>
+      <div class="ftitle">IFAs &amp; Stock Brokers</div>
+      <div class="fdesc">LAS against equities and mutual funds. Lender comparisons, onboarding flow guidance, product eligibility checks.</div>
+    </div>
+  </div>
+</div>
+
+<div class="divider"></div>
+
+<!-- ════════════════════════════════════════════
+     WHY LISA EXISTS
+════════════════════════════════════════════ -->
+<div id="why-lisa" class="anchor">
+  <div class="section-header">
+    <div class="eyebrow">The Problem</div>
+    <h2><span class="ico">&#128205;</span> Why LISA Exists</h2>
+    <p>Before LISA, every product question required a call or email to the support team. Partners waited. Support was overloaded. Information was sometimes inconsistent.</p>
+  </div>
+
+  <div class="compare">
+    <div class="comp-card">
+      <div class="comp-head bad">&#10060; Without LISA</div>
+      <div class="comp-body">
+        <ul>
+          <li>MFD calls support for every rate question</li>
+          <li>Support team fields 100+ repetitive queries per day</li>
+          <li>Wrong info sometimes shared by junior team</li>
+          <li>WhatsApp content takes 30 minutes to write</li>
+          <li>Partner onboarding requires days of back-and-forth</li>
+          <li>No insight into what partners struggle with most</li>
+          <li>Support unavailable after working hours</li>
+        </ul>
+      </div>
+    </div>
+    <div class="comp-card">
+      <div class="comp-head good">&#10003; With LISA</div>
+      <div class="comp-body">
+        <ul>
+          <li>LISA answers in 1.5 seconds, any time of day</li>
+          <li>Repetitive queries handled automatically: support focuses on edge cases</li>
+          <li>Only answers from verified company documents: no wrong info</li>
+          <li>WhatsApp content generated in 5 seconds with exact product numbers</li>
+          <li>All onboarding questions answered instantly, 24/7</li>
+          <li>Feedback + intent data shows exactly where partners are confused</li>
+          <li>Always available: 2am, weekends, holidays</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="divider"></div>
+
+<!-- ════════════════════════════════════════════
+     HOW IT WORKS SIMPLE
+════════════════════════════════════════════ -->
+<div id="how-it-works" class="anchor">
+  <div class="section-header">
+    <div class="eyebrow">Overview</div>
+    <h2><span class="ico">&#9889;</span> How LISA Works: Simple Version</h2>
+    <p>No technical background required. This is how LISA handles every message from end to end.</p>
+  </div>
+
+  <div class="highlight">
+    &#128218; <strong>The simplest analogy:</strong> LISA is like a new employee who has read every single document Lark Finserv has ever written: all FAQs, all lender agreements, all product manuals: and can recall the right page in under 2 seconds. The key difference: this employee works 24/7, never misquotes a number, and can serve 1,000 partners simultaneously.
+  </div>
+
+  <div class="steps">
+    <div class="step">
+      <div class="snum">1</div>
+      <div class="sbody">
+        <div class="stitle">Partner asks a question</div>
+        <div class="sdesc">"What is the minimum portfolio value for LAMF?": typed into the chat window on the web portal.</div>
+      </div>
+    </div>
+    <div class="step">
+      <div class="snum">2</div>
+      <div class="sbody">
+        <div class="stitle">LISA classifies the intent</div>
+        <div class="sdesc">AI instantly categorizes it as a <em>product question</em> (not content creation or analytics). This determines which prompt template and tools are used next.</div>
+      </div>
+    </div>
+    <div class="step">
+      <div class="snum">3</div>
+      <div class="sbody">
+        <div class="stitle">LISA searches the knowledge base</div>
+        <div class="sdesc">Scans all of Lark's documents and picks the 5 most relevant paragraphs in milliseconds. This is called RAG: Retrieval Augmented Generation.</div>
+      </div>
+    </div>
+    <div class="step">
+      <div class="snum">4</div>
+      <div class="sbody">
+        <div class="stitle">GPT-4o reads only those paragraphs and answers</div>
+        <div class="sdesc">The AI sees only the 5 retrieved paragraphs and forms an answer. It cannot make up numbers or policies: it can only use what was retrieved.</div>
+      </div>
+    </div>
+    <div class="step">
+      <div class="snum">5</div>
+      <div class="sbody">
+        <div class="stitle">Response appears on screen</div>
+        <div class="sdesc">Partner sees the answer in ~1.5 seconds. The full conversation is saved so LISA remembers context in follow-up messages.</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="divider"></div>
+
+<!-- ════════════════════════════════════════════
+     PRODUCT SUITE
+════════════════════════════════════════════ -->
+<div id="product-suite" class="anchor">
+  <div class="section-header">
+    <div class="eyebrow">Product</div>
+    <h2><span class="ico">&#127963;</span> Lark Finserv Product Suite</h2>
+    <p>Lark builds LAS and LAMF infrastructure for the Indian market. LISA must know every product to answer partner questions accurately.</p>
+  </div>
+
+  <div class="card-row">
+    <div class="feat-card">
+      <div class="ficon">&#9889;</div>
+      <div class="ftitle">Lark Edge</div>
+      <div class="fdesc"><strong>For:</strong> MFDs &amp; IFAs<br><strong>Key promise:</strong> Live in 10 minutes, zero integration. Dynamic LAS enablement: MFD's clients apply for LAMF directly.<br><strong>Unique:</strong> No tech team required to go live.</div>
+    </div>
+    <div class="feat-card">
+      <div class="ficon">&#128179;</div>
+      <div class="ftitle">Lark Vault</div>
+      <div class="fdesc"><strong>For:</strong> Wealth management firms<br><strong>Key promise:</strong> White-labeled LAS platform. Goes live under the firm's own brand in under 1 hour.<br><strong>Unique:</strong> Full product, zero branding of Lark.</div>
+    </div>
+    <div class="feat-card">
+      <div class="ficon">&#128421;</div>
+      <div class="ftitle">Lark Grid</div>
+      <div class="fdesc"><strong>For:</strong> Fintechs &amp; developers<br><strong>Key promise:</strong> REST API + SDK stack. 24-hour deployment. Webhook support, event-driven architecture.<br><strong>Unique:</strong> Deep integration into any existing app.</div>
+    </div>
+    <div class="feat-card">
+      <div class="ficon">&#127970;</div>
+      <div class="ftitle">Lark OS</div>
+      <div class="fdesc"><strong>For:</strong> Large NBFCs &amp; enterprises<br><strong>Key promise:</strong> Full LAS infrastructure. On-premise or hybrid. 89ms latency, 99.99% uptime SLA.<br><strong>Unique:</strong> Enterprise-grade, on your own servers.</div>
+    </div>
+  </div>
+</div>
+
+<div class="divider"></div>
+
+<!-- ════════════════════════════════════════════
+     LAMF & LAS
+════════════════════════════════════════════ -->
+<div id="lamf-las" class="anchor">
+  <div class="section-header">
+    <div class="eyebrow">Product</div>
+    <h2><span class="ico">&#128205;</span> LAMF &amp; LAS: Product Details</h2>
+    <p>These are the two core loan products LISA answers questions about. Every rate, rule, and process below must exist in the RAG knowledge base.</p>
+  </div>
+
+  <h3>LAMF: Loan Against Mutual Funds</h3>
+  <div class="tbl-wrap">
+    <table>
+      <thead><tr><th>Parameter</th><th>Details</th></tr></thead>
+      <tbody>
+        <tr><td>What it is</td><td>Loan using mutual fund portfolio as collateral: units are pledged (lien marked), not redeemed. Client keeps earning returns.</td></tr>
+        <tr><td>Minimum Portfolio</td><td>Rs. 50,000</td></tr>
+        <tr><td>Loan-to-Value (LTV)</td><td>Up to 50% for equity funds · Up to 80% for debt funds</td></tr>
+        <tr><td>Interest Rate</td><td>Starting from 10.5% per annum (varies by lender: see Lenders section)</td></tr>
+        <tr><td>Eligible Securities</td><td>Equity mutual funds, debt funds, hybrid funds, ETFs, index funds</td></tr>
+        <tr><td>Ineligible</td><td>ELSS (lock-in period) · Closed-ended funds · Some liquid funds</td></tr>
+        <tr><td>Tenure</td><td>12 months: revolving credit line, renewed annually</td></tr>
+        <tr><td>Processing Fee</td><td>Typically 0.5% of loan amount</td></tr>
+        <tr><td>Prepayment</td><td>Allowed at any time: no prepayment penalty in most lender agreements</td></tr>
+        <tr><td>Disbursement Time</td><td>~3 minutes (digital) · 2-3 days (phygital)</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h3>LAS: Loan Against Securities</h3>
+  <div class="tbl-wrap">
+    <table>
+      <thead><tr><th>Parameter</th><th>Details</th></tr></thead>
+      <tbody>
+        <tr><td>What it is</td><td>Loan against listed equity shares, ETFs, bonds held in demat account</td></tr>
+        <tr><td>LTV</td><td>Up to 50% on equity shares (SEBI mandated cap)</td></tr>
+        <tr><td>Interest Rate</td><td>10.5% to 14% depending on lender and security type</td></tr>
+        <tr><td>Eligible Securities</td><td>NSE/BSE listed equity shares · ETFs · Government bonds · Corporate bonds</td></tr>
+        <tr><td>Pledge Method</td><td>NSDL/CDSL demat pledge (digital) or physical forms (phygital)</td></tr>
+        <tr><td>Margin Call</td><td>Triggered when portfolio value drops below threshold: top-up or partial repayment required within 24-48 hours</td></tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<div class="divider"></div>
+
+<!-- ════════════════════════════════════════════
+     LOAN JOURNEY
+════════════════════════════════════════════ -->
+<div id="loan-journey" class="anchor">
+  <div class="section-header">
+    <div class="eyebrow">Product</div>
+    <h2><span class="ico">&#128640;</span> Digital Loan Journey: End to End (~3 minutes)</h2>
+    <p>This is the full step-by-step process when a client applies for LAMF through a Lark partner platform.</p>
+  </div>
+
+  <div class="steps">
+    <div class="step">
+      <div class="snum">1</div>
+      <div class="sbody">
+        <div class="stitle">Eligibility Check</div>
+        <div class="sdesc">Client's portfolio is checked against the eligible fund list. Minimum value Rs. 50,000. System checks lien marking eligibility with CAMS / KFintech in real time.</div>
+      </div>
+    </div>
+    <div class="step">
+      <div class="snum">2</div>
+      <div class="sbody">
+        <div class="stitle">Loan Offer Generation</div>
+        <div class="sdesc">System calculates eligible amount based on LTV ratio of each fund category. Offer shown with interest rate, tenure, and processing fee clearly displayed.</div>
+      </div>
+    </div>
+    <div class="step">
+      <div class="snum">3</div>
+      <div class="sbody">
+        <div class="stitle">KYC Verification</div>
+        <div class="sdesc">Verified via CKYC lookup or Aadhaar OTP. New KYC completed digitally if not already on record. Video KYC available for some lenders.</div>
+      </div>
+    </div>
+    <div class="step">
+      <div class="snum">4</div>
+      <div class="sbody">
+        <div class="stitle">Mutual Fund Pledging (Lien Marking)</div>
+        <div class="sdesc">Units pledged with the lending institution via CAMS/KFintech API. Units are locked: client cannot redeem: but continues to earn fund returns.</div>
+      </div>
+    </div>
+    <div class="step">
+      <div class="snum">5</div>
+      <div class="sbody">
+        <div class="stitle">E-Mandate Setup (NACH)</div>
+        <div class="sdesc">Auto-debit mandate registered for interest payments. Ensures timely monthly interest deductions without manual transfer by client.</div>
+      </div>
+    </div>
+    <div class="step">
+      <div class="snum">6</div>
+      <div class="sbody">
+        <div class="stitle">E-Sign &amp; Loan Agreement</div>
+        <div class="sdesc">Digital signature via Aadhaar e-sign or partner-specific DocuSign. Loan sanction letter and agreement executed electronically. Legally binding.</div>
+      </div>
+    </div>
+    <div class="step">
+      <div class="snum">7</div>
+      <div class="sbody">
+        <div class="stitle">Disbursement</div>
+        <div class="sdesc">Loan amount credited to client's registered bank account. Full process: ~3 minutes digital / 2-3 days phygital (ABFL, Tata Capital offline process).</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="divider"></div>
+
+<!-- ════════════════════════════════════════════
+     ARCHITECTURE
+════════════════════════════════════════════ -->
+<div id="architecture" class="anchor">
+  <div class="section-header">
+    <div class="eyebrow">Technical</div>
+    <h2><span class="ico">&#9881;</span> Architecture &amp; Tech Stack</h2>
+    <p>Every layer of the stack and why it was chosen for a financial AI assistant.</p>
+  </div>
+
+  <div class="tbl-wrap">
+    <table>
+      <thead><tr><th>Layer</th><th>Technology</th><th>Why</th></tr></thead>
+      <tbody>
+        <tr><td>Web Framework</td><td><span class="pill pb">Flask</span></td><td>Lightweight Python framework: API-first, minimal overhead, fast to build and deploy</td></tr>
+        <tr><td>AI Orchestration</td><td><span class="pill pp">LangGraph</span></td><td>Multi-step AI graph: intent classifier → retrieval → LLM → memory → trace, all as a controllable pipeline</td></tr>
+        <tr><td>LLM</td><td><span class="pill pb">GPT-4o-mini</span></td><td>Best cost-to-quality ratio for financial Q&amp;A. Fast, accurate, affordable at scale</td></tr>
+        <tr><td>Vector Database</td><td><span class="pill pg">FAISS</span></td><td>Facebook AI Similarity Search: local, free, sub-millisecond search across millions of vectors</td></tr>
+        <tr><td>Embeddings</td><td><span class="pill pb">text-embedding-3-large</span></td><td>OpenAI's best embedding model: 3072-dimensional vectors with deep semantic understanding</td></tr>
+        <tr><td>Re-ranker</td><td><span class="pill pp">ms-marco-MiniLM-L-6-v2</span></td><td>Cross-encoder for precise pairwise scoring: improves retrieval accuracy by 30-40% over FAISS alone</td></tr>
+        <tr><td>App Database</td><td><span class="pill pg">SQLite → PostgreSQL</span></td><td>SQLite in dev (zero setup). One .env change switches to PostgreSQL for production</td></tr>
+        <tr><td>Auth</td><td><span class="pill pb">Flask-Login</span></td><td>Session-based auth. Scrypt hashed passwords. Login required decorator on all API routes</td></tr>
+        <tr><td>Observability</td><td><span class="pill po">LangSmith</span></td><td>Traces every LLM call: latency, token count, intent classification, retrieved documents</td></tr>
+        <tr><td>Frontend</td><td><span class="pill pgr">HTML + Vanilla JS</span></td><td>No framework overhead. marked.js renders markdown. DOMPurify prevents XSS attacks</td></tr>
+        <tr><td>Production</td><td><span class="pill pp">AWS Bedrock</span></td><td>Managed RAG, S3 doc sync, RBI-ready compliance, auto-scaling to millions of users</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h3>Project Folder Structure</h3>
+  <pre>LISA-RAG/
+  app.py                          ← entry point
+  .env                            ← API keys (git-ignored, never committed)
+  instance/
+    lisa.db                       ← SQLite database (git-ignored)
+  config/
+    config.py                     ← all settings in one place
+  backend/
+    app.py                        ← Flask factory (create_app)
+    chatbot/
+      graph/
+        builder.py                ← LangGraph graph definition
+        nodes.py                  ← 5 node functions
+        state.py                  ← GraphState TypedDict
+      rag/
+        ingest.py                 ← document loading, chunking, FAISS build
+        retriever.py              ← HybridRetriever (FAISS search)
+        reranker.py               ← CrossEncoderReranker
+      memory/
+        store.py                  ← DB models + save/load messages
+      prompts/
+        system.py                 ← all LLM prompt templates
+      tools/
+        faq.py / content.py / analytics.py
+    api/routes.py                 ← /api/chat, /api/sessions, /api/feedback
+    auth/routes.py                ← /login, /logout
+    scripts/
+      create_db.py
+      seed_users.py
+      ingest_documents.py
+  frontend/
+    templates/chat.html, login.html
+    static/css/chat.css, js/chat.js
+  data/                           ← knowledge documents (git-ignored)
+  vectorstore/                    ← FAISS index (git-ignored, generated)</pre>
+</div>
+
+<div class="divider"></div>
+
+<!-- ════════════════════════════════════════════
+     RAG PIPELINE
+════════════════════════════════════════════ -->
+<div id="rag-pipeline" class="anchor">
+  <div class="section-header">
+    <div class="eyebrow">Technical</div>
+    <h2><span class="ico">&#128280;</span> RAG Pipeline: How LISA Retrieves Knowledge</h2>
+    <p>RAG (Retrieval Augmented Generation) is the core technology that prevents hallucination and makes LISA's answers trustworthy.</p>
+  </div>
+
+  <div class="highlight">
+    &#128218; <strong>Why RAG?</strong> Without RAG, GPT answers from its 2023 training data: it doesn't know your interest rates, your lenders, your products. With RAG, LISA first retrieves the exact paragraphs from Lark's documents, then GPT answers <em>only from those paragraphs</em>. The LLM becomes a reader, not a guesser.
+  </div>
+
+  <h3>Phase 1: Ingestion (run once before launch)</h3>
+
+  <div class="pre-label">backend/chatbot/rag/ingest.py</div>
+  <pre>STEP 1: LOAD DOCUMENTS
+  .txt files  → TextLoader  (reads raw text line by line)
+  .csv files  → CSVLoader   (reads row by row, each row = document)
+  Each doc gets metadata: { source, topic, partner_type, file_type }
+
+STEP 2: CHUNK (RecursiveCharacterTextSplitter)
+  Settings:
+    chunk_size    = 500 characters
+    chunk_overlap = 100 characters
+
+  Why 500 chars? Small enough to stay within GPT's context window.
+  Why overlap? Sentences that span chunk boundaries are preserved.
+
+  One document (50,000 chars)  →  ~100 chunks of 500 chars each
+
+  Split priority order (tries larger breaks first):
+    1. \n====   major section headers
+    2. \n----   minor section headers
+    3. \n\n     paragraph breaks
+    4. \n       new lines
+    5. .        sentence ends
+    6. (space)  word breaks  ← last resort only
+
+STEP 3: EMBED (OpenAI text-embedding-3-large)
+  Each chunk → API call → [0.023, -0.412, 0.891, ...] (3072 numbers)
+  Chunks with similar meaning → similar numbers (close in vector space)
+  This is semantic search: meaning-matching, not keyword-matching.
+
+  "What is LAMF rate?"         → similar vector as → "Interest rate 10.5%"   ✓
+  "loan against mutual funds"  → similar vector as → "LAMF product details"  ✓
+
+STEP 4: SAVE FAISS INDEX
+  FAISS.from_documents(all_chunks, embedding_model)
+  Saves two files:
+    vectorstore/index.faiss   ← all 3072-dim vectors, compressed + indexed
+    vectorstore/index.pkl     ← original text + metadata for each chunk</pre>
+
+  <h3>Phase 2: Query Time (every user message)</h3>
+
+  <div class="pre-label">backend/chatbot/rag/retriever.py + reranker.py</div>
+  <pre>STEP 5: EMBED QUERY
+  User's message → same OpenAI embedding model → query vector
+
+STEP 6: FAISS SIMILARITY SEARCH
+  faiss_index.similarity_search_with_score(query_vector, k=15)
+  Returns top 15 chunks by cosine distance in milliseconds
+  Score closer to 0 = more similar
+
+STEP 7: CROSS-ENCODER RERANK
+  Model: ms-marco-MiniLM-L-6-v2
+  For each of the 15 chunks, scores the (query, chunk) pair:
+    (query, chunk_1) → 0.92  ← most relevant
+    (query, chunk_2) → 0.71
+    (query, chunk_3) → 0.45
+    (query, chunk_4) → 0.38
+    (query, chunk_5) → 0.21
+    ...
+  Re-sorted → top 5 most relevant chunks selected
+
+STEP 8: INJECT INTO LLM PROMPT
+  Top 5 chunks → inserted as [CONTEXT DOCUMENTS] in prompt
+  GPT-4o-mini answers ONLY from context
+  If context has no answer → LISA says "I don't have that info"</pre>
+
+  <div class="highlight">
+    &#128161; <strong>Why two stages?</strong> FAISS is extremely fast but gives approximate results. The cross-encoder is precise but slow. Together: FAISS narrows 500+ chunks to 15 in under 1ms, then the cross-encoder precisely scores only those 15. You get both speed and accuracy.
+  </div>
+</div>
+
+<div class="divider"></div>
+
+<!-- ════════════════════════════════════════════
+     LANGGRAPH
+════════════════════════════════════════════ -->
+<div id="langgraph" class="anchor">
+  <div class="section-header">
+    <div class="eyebrow">Technical</div>
+    <h2><span class="ico">&#128440;</span> LangGraph: The AI Workflow</h2>
+    <p>Every user message passes through a 5-node graph. Each node adds data to a shared state object and passes it forward.</p>
+  </div>
+
+  <div class="highlight">
+    &#128230; <strong>Analogy:</strong> Think of GraphState as a package that travels through 5 departments. Each department opens it, adds something (intent label, retrieved docs, AI response, saved message ID), reseals it, and sends it to the next. At the end, the API unpacks it and sends the response to the partner.
+  </div>
+
+  <div class="flow">
+    <div class="fnode">
+      <div class="fnum">1</div>
+      <div class="fbody">
+        <div class="ftit">Intent Classifier</div>
+        <p>LLM reads the user's message and returns JSON: <code>{"intent": "query_support", "confidence": 0.97}</code>. Routes to the correct prompt and tools based on intent.</p>
+      </div>
+    </div>
+    <div class="farrow">&#8595;</div>
+    <div class="fnode">
+      <div class="fnum">2</div>
+      <div class="fbody">
+        <div class="ftit">RAG Retrieval</div>
+        <p>HybridRetriever embeds the query → FAISS returns top 15 chunks → CrossEncoderReranker scores them → top 5 added to <code>state["reranked_documents"]</code>.</p>
+      </div>
+    </div>
+    <div class="farrow">&#8595;</div>
+    <div class="fnode">
+      <div class="fnum">3</div>
+      <div class="fbody">
+        <div class="ftit">LLM Response</div>
+        <p>Selects prompt template based on intent. Injects top 5 docs + last 6 conversation messages. GPT-4o-mini generates response. If a tool is needed, sets <code>state["tool_name"]</code>.</p>
+      </div>
+    </div>
+    <div class="farrow">&#8595;</div>
+    <div class="fnode">
+      <div class="fnum">3b</div>
+      <div class="fbody">
+        <div class="ftit">Tool Execution (conditional)</div>
+        <p>If <code>tool_name</code> is set: calls <strong>FAQ Retriever</strong>, <strong>Content Generator</strong>, or <strong>Partner Analytics</strong>. Tool output appended to response. Skipped if no tool needed.</p>
+      </div>
+    </div>
+    <div class="farrow">&#8595;</div>
+    <div class="fnode">
+      <div class="fnum">4</div>
+      <div class="fbody">
+        <div class="ftit">Memory Update</div>
+        <p>Saves both user and assistant messages to SQLite. Auto-sets session title from first message. Returns <code>message_id</code> (UUID): used by the frontend for feedback thumbs up/down.</p>
+      </div>
+    </div>
+    <div class="farrow">&#8595;</div>
+    <div class="fnode">
+      <div class="fnum">5</div>
+      <div class="fbody">
+        <div class="ftit">Trace Logger</div>
+        <p>Logs to LangSmith: intent classification, number of docs retrieved, LLM latency, total end-to-end latency. Full observability for every single message.</p>
+      </div>
+    </div>
+  </div>
+
+  <h3>GraphState: What Flows Through</h3>
+  <pre>GraphState = {
+  # Set by API route before graph starts
+  "query":                "What is the minimum portfolio value for LAMF?",
+  "user_id":              "uuid-logged-in-user",
+  "session_id":           "uuid-chat-session",
+  "conversation_history": [{"role": "user", "content": "..."}, ...],  # last 20 msgs
+
+  # Added by Node 1: Intent Classifier
+  "intent":               "query_support",     # or content_generation / behaviour_discovery
+  "intent_confidence":    0.97,
+  "is_in_scope":          True,
+
+  # Added by Node 2: RAG
+  "retrieved_documents":  [ ... ],             # top 15 raw FAISS chunks
+  "reranked_documents":   [ ... ],             # top 5 after cross-encoder
+
+  # Added by Node 3: LLM
+  "response":             "Minimum portfolio value for LAMF is Rs. 50,000...",
+  "tool_name":            None,               # or "analyze_partner_behavior" if needed
+
+  # Added by Node 3b: Tool (only if tool_name set)
+  "tool_output":          "...",
+
+  # Added by Node 4: Memory
+  "memory_updated":       True,
+  "message_id":           "uuid-saved-message",  # sent to frontend for feedback
+
+  # Added by Node 5: Trace
+  "trace_metadata":       { "latency_ms": 1240, "intent": "query_support", "num_docs": 5 },
+
+  # Error (if anything fails)
+  "error":                None
+}</pre>
+</div>
+
+<div class="divider"></div>
+
+<!-- ════════════════════════════════════════════
+     DATABASE
+════════════════════════════════════════════ -->
+<div id="database" class="anchor">
+  <div class="section-header">
+    <div class="eyebrow">Technical</div>
+    <h2><span class="ico">&#128451;</span> Database: What is Stored</h2>
+    <p>Four tables in SQLite (dev) or PostgreSQL (production). Everything LISA saves about conversations, users, and feedback.</p>
+  </div>
+
+  <div class="highlight">
+    &#128451; <strong>Analogy:</strong> Four filing drawers. Drawer 1 = Who can log in. Drawer 2 = Conversation folders. Drawer 3 = Every message ever sent. Drawer 4 = Feedback slips (thumbs up/down) clipped to each AI response.
+  </div>
+
+  <h3>users</h3>
+  <pre>id            → UUID  "a3f2c1d4-..."
+username      → "demo_mfd"
+password_hash → "scrypt:32768:8:1$salt$hash..."  ← NEVER plain text
+partner_type  → "MFD" | "wealth_platform" | "admin"
+partner_name  → "Demo MFD Partner"
+is_active     → True</pre>
+
+  <h3>chat_sessions</h3>
+  <pre>id          → UUID
+user_id     → FK → users.id
+title       → "What is LAMF interest rate?"  ← auto-set from first message
+is_active   → True  (False = soft deleted, still in DB)
+created_at, updated_at → timestamps</pre>
+
+  <h3>messages</h3>
+  <pre>id                  → UUID  ← this is what feedback.message_id links to
+session_id          → FK → sessions.id
+role                → "user" | "assistant"
+content             → full text of the message
+intent              → "query_support" | "content_generation" | "behaviour_discovery"
+is_in_scope         → True / False
+confidence          → 0.97  (intent classification confidence)
+retrieved_docs_json → '[{"text":"...", "score":0.82, "source":"..."}, ...]'
+latency_ms          → 1240  (how long the full LangGraph run took)</pre>
+
+  <h3>feedback</h3>
+  <pre>id          → UUID
+message_id  → FK → messages.id  ← links to a specific AI response
+user_id     → FK → users.id
+rating      → 1 (thumbs up)  |  -1 (thumbs down)
+comment     → optional text
+created_at  → timestamp</pre>
+</div>
+
+<div class="divider"></div>
+
+<!-- ════════════════════════════════════════════
+     API
+════════════════════════════════════════════ -->
+<div id="api" class="anchor">
+  <div class="section-header">
+    <div class="eyebrow">Technical</div>
+    <h2><span class="ico">&#128279;</span> API Reference</h2>
+    <p>All endpoints. Every route that requires authentication returns <code>401</code> JSON if the user is not logged in.</p>
+  </div>
+
+  <div class="tbl-wrap">
+    <table>
+      <thead><tr><th>Method</th><th>Endpoint</th><th>Auth</th><th>Description</th></tr></thead>
+      <tbody>
+        <tr><td><span class="pill pb">POST</span></td><td><code>/api/chat</code></td><td>Yes</td><td>Send message. Returns: response, intent, message_id, latency_ms, retrieved docs.</td></tr>
+        <tr><td><span class="pill pb">POST</span></td><td><code>/api/chat/regenerate</code></td><td>Yes</td><td>Re-generate the last AI response with different sampling temperature.</td></tr>
+        <tr><td><span class="pill pg">GET</span></td><td><code>/api/sessions</code></td><td>Yes</td><td>List all chat sessions for the current logged-in user.</td></tr>
+        <tr><td><span class="pill pb">POST</span></td><td><code>/api/sessions</code></td><td>Yes</td><td>Create a new empty chat session.</td></tr>
+        <tr><td><span class="pill pg">GET</span></td><td><code>/api/sessions/&lt;id&gt;/messages</code></td><td>Yes</td><td>Load full message history for a session.</td></tr>
+        <tr><td><span class="pill pr">DELETE</span></td><td><code>/api/sessions/&lt;id&gt;</code></td><td>Yes</td><td>Soft-delete a session (is_active = False). Data preserved.</td></tr>
+        <tr><td><span class="pill pg">GET</span></td><td><code>/api/sessions/search?q=</code></td><td>Yes</td><td>Full-text search across all sessions and messages for current user.</td></tr>
+        <tr><td><span class="pill pg">GET</span></td><td><code>/api/sessions/&lt;id&gt;/export</code></td><td>Yes</td><td>Export full session as JSON or plain text.</td></tr>
+        <tr><td><span class="pill pb">POST</span></td><td><code>/api/feedback</code></td><td>Yes</td><td>Submit thumbs up (+1) or down (-1) for a specific message_id.</td></tr>
+        <tr><td><span class="pill pg">GET</span></td><td><code>/api/health</code></td><td>No</td><td>Health check: returns DB status, FAISS loaded boolean, LLM ping.</td></tr>
+        <tr><td><span class="pill pg">GET</span></td><td><code>/auth/login</code></td><td>No</td><td>Login page.</td></tr>
+        <tr><td><span class="pill pb">POST</span></td><td><code>/auth/login</code></td><td>No</td><td>Submit username + password. Sets session cookie on success.</td></tr>
+        <tr><td><span class="pill pb">POST</span></td><td><code>/auth/logout</code></td><td>Yes</td><td>Clear session, redirect to login.</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h3>Chat Request/Response Example</h3>
+  <pre>POST /api/chat
+Content-Type: application/json
+{
+  "query": "What is the LAMF interest rate for BFL?",
+  "session_id": "abc-123-uuid"
+}
+
+Response 200:
+{
+  "response":    "BFL (Bajaj Finance) offers LAMF at 10.5% to 11.5% per annum...",
+  "intent":      "query_support",
+  "confidence":  0.97,
+  "session_id":  "abc-123-uuid",
+  "message_id":  "msg-uuid-xyz",   ← store this for feedback submission
+  "latency_ms":  1240,
+  "documents":   [
+    { "text": "BFL LAMF rate is 10.5%...", "score": 0.92, "source": "AI_B2C_RAG.txt" },
+    ...
+  ]
+}</pre>
+</div>
+
+<div class="divider"></div>
+
+<!-- ════════════════════════════════════════════
+     PROMPTS
+════════════════════════════════════════════ -->
+<div id="prompts" class="anchor">
+  <div class="section-header">
+    <div class="eyebrow">Technical</div>
+    <h2><span class="ico">&#128172;</span> LLM Prompts</h2>
+    <p>The exact instructions given to GPT-4o-mini before every response. Prompts are the "job description" for the AI: read before every single answer.</p>
+  </div>
+
+  <h3>1. Intent Classifier</h3>
+  <pre>You are an intent classifier for LISA, the AI assistant for Lark Finserv.
+
+Classify the user's message into exactly ONE of:
+  query_support        → product questions, eligibility, rates, process, lender info
+  content_generation   → create WhatsApp messages, emails, pitch scripts
+  behaviour_discovery  → analytics, partner insights, usage patterns, reports
+
+Return ONLY valid JSON: no extra text:
+  { "intent": "query_support", "confidence": 0.97 }</pre>
+
+  <h3>2. Query Support (product questions)</h3>
+  <pre>You are LISA (Lark Intelligent Support Assistant), built by Lark Finserv.
+
+CONTEXT DOCUMENTS (retrieved from Lark's knowledge base):
+{context_documents}
+
+CONVERSATION HISTORY (last 6 messages):
+{conversation_history}
+
+USER QUERY: {query}
+
+CRITICAL RULES:
+- Answer ONLY from the context documents above
+- NEVER fabricate interest rates, fees, or product details
+- If context does not contain the answer → say "I don't have that specific information"
+- Use bullet points for multi-part answers
+- Include specific numbers from context when available</pre>
+
+  <h3>3. Content Generation (marketing content)</h3>
+  <pre>You are LISA, Lark Finserv's marketing co-pilot for MFD partners.
+
+PROMOTION MATERIAL (from Lark's document library):
+{promotion_material}
+
+USER REQUEST: {query}
+
+INSTRUCTIONS:
+- Generate the content DIRECTLY: do not say you will generate it, just do it
+- Use actual product details from the promotion material above
+- WhatsApp format: short, 3-4 lines, include relevant emoji, clear CTA
+- Email format: subject line + brief body
+- Do not use product numbers not present in the promotion material</pre>
+
+  <h3>4. Behaviour Discovery (analytics)</h3>
+  <pre>You are LISA, analysing partner behaviour for Lark Finserv.
+
+PARTNER DATA: {partner_analytics}
+USER REQUEST: {query}
+
+Provide data-driven insights. If data is insufficient, use industry-standard
+MFD behaviour patterns as fallback but clearly state it is a general insight.
+Format as bullet points with clear headers.</pre>
+</div>
+
+<div class="divider"></div>
+
+<!-- ════════════════════════════════════════════
+     SECURITY
+════════════════════════════════════════════ -->
+<div id="security" class="anchor">
+  <div class="section-header">
+    <div class="eyebrow">Technical</div>
+    <h2><span class="ico">&#128274;</span> Security</h2>
+    <p>Every known attack surface and how it is mitigated in LISA.</p>
+  </div>
+
+  <div class="tbl-wrap">
+    <table>
+      <thead><tr><th>Threat</th><th>How It's Handled</th></tr></thead>
+      <tbody>
+        <tr><td>API Key Exposure</td><td>Keys in <code>.env</code> only: <code>.gitignore</code> prevents commit. Never hardcoded in any Python file.</td></tr>
+        <tr><td>Password Storage</td><td>Scrypt hash (cost factor 32768). Never stored as plain text. Not reversible.</td></tr>
+        <tr><td>Unauthorized API Access</td><td><code>@login_required</code> on every <code>/api/*</code> route. Returns 401 JSON (not a redirect) for API consumers.</td></tr>
+        <tr><td>XSS Attacks</td><td>All markdown rendered via marked.js is sanitized with DOMPurify before DOM insertion. Prevents script injection.</td></tr>
+        <tr><td>Database Exposure</td><td><code>instance/</code> folder in <code>.gitignore</code>. Database never pushed to GitHub.</td></tr>
+        <tr><td>Session Hijacking</td><td>Flask SECRET_KEY (64+ random chars). HttpOnly secure cookies. Session expires on logout.</td></tr>
+        <tr><td>Prompt Injection</td><td>User input always passed as named variable, never string-concatenated into prompt template.</td></tr>
+        <tr><td>LLM Hallucination</td><td>RAG architecture + strict system prompt: "Only answer from context documents. If not in context, say so."</td></tr>
+        <tr><td>Data Leakage</td><td><code>data/</code> folder git-ignored. Business documents never go to GitHub or any public repository.</td></tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<div class="divider"></div>
+
+<!-- ════════════════════════════════════════════
+     LENDERS
+════════════════════════════════════════════ -->
+<div id="lenders" class="anchor">
+  <div class="section-header">
+    <div class="eyebrow">Operations</div>
+    <h2><span class="ico">&#127963;</span> Lenders: Who LISA Must Know</h2>
+    <p>LISA needs per-lender information in the RAG knowledge base to answer questions like "What is DSP's rate?" or "How does the ABFL offline process work?"</p>
+  </div>
+
+  <div class="lender-grid">
+    <div class="lcard">
+      <div class="lcard-head">
+        <div class="lcard-name">BFL: Bajaj Finance <span class="pill pg">Digital</span></div>
+      </div>
+      <div class="lcard-body">
+        <div class="row"><span class="k">Interest Rate</span><span class="v">10.5% – 11.5%</span></div>
+        <div class="row"><span class="k">LTV (equity)</span><span class="v">Up to 50%</span></div>
+        <div class="row"><span class="k">LTV (debt)</span><span class="v">Up to 80%</span></div>
+        <div class="row"><span class="k">Min Loan</span><span class="v">Rs. 25,000</span></div>
+        <div class="row"><span class="k">Process</span><span class="v">Fully digital</span></div>
+        <div class="row"><span class="k">TAT</span><span class="v">Same day (T+0)</span></div>
+      </div>
+    </div>
+
+    <div class="lcard">
+      <div class="lcard-head">
+        <div class="lcard-name">DSP Blackrock <span class="pill pb">AMC Linked</span></div>
+      </div>
+      <div class="lcard-body">
+        <div class="row"><span class="k">Interest Rate</span><span class="v">10.75% – 12%</span></div>
+        <div class="row"><span class="k">LTV</span><span class="v">Up to 50%</span></div>
+        <div class="row"><span class="k">Eligible Funds</span><span class="v">DSP + all CAMS</span></div>
+        <div class="row"><span class="k">Process</span><span class="v">Digital + DSP lien</span></div>
+        <div class="row"><span class="k">TAT</span><span class="v">T+1 working day</span></div>
+      </div>
+    </div>
+
+    <div class="lcard">
+      <div class="lcard-head">
+        <div class="lcard-name">ABFL: Aditya Birla <span class="pill po">Phygital</span></div>
+      </div>
+      <div class="lcard-body">
+        <div class="row"><span class="k">Interest Rate</span><span class="v">10.5% – 12%</span></div>
+        <div class="row"><span class="k">LTV</span><span class="v">Up to 50%</span></div>
+        <div class="row"><span class="k">Process</span><span class="v">Offline / phygital</span></div>
+        <div class="row"><span class="k">TAT</span><span class="v">2-3 business days</span></div>
+        <div class="row"><span class="k">Special</span><span class="v">High-ticket (10 Cr+)</span></div>
+      </div>
+    </div>
+
+    <div class="lcard">
+      <div class="lcard-head">
+        <div class="lcard-name">Tata Capital <span class="pill po">Phygital</span></div>
+      </div>
+      <div class="lcard-body">
+        <div class="row"><span class="k">Interest Rate</span><span class="v">11% – 13%</span></div>
+        <div class="row"><span class="k">LTV</span><span class="v">Up to 50%</span></div>
+        <div class="row"><span class="k">Process</span><span class="v">Tata offline LAS</span></div>
+        <div class="row"><span class="k">TAT</span><span class="v">2-3 business days</span></div>
+        <div class="row"><span class="k">Segment</span><span class="v">SME + HNI</span></div>
+      </div>
+    </div>
+
+    <div class="lcard">
+      <div class="lcard-head">
+        <div class="lcard-name">Mirae Asset <span class="pill pg">Digital</span></div>
+      </div>
+      <div class="lcard-body">
+        <div class="row"><span class="k">Interest Rate</span><span class="v">10.5% – 11.5%</span></div>
+        <div class="row"><span class="k">LTV</span><span class="v">Up to 50%</span></div>
+        <div class="row"><span class="k">Process</span><span class="v">Digital: CAMS lien</span></div>
+        <div class="row"><span class="k">Eligible</span><span class="v">All CAMS funds</span></div>
+        <div class="row"><span class="k">TAT</span><span class="v">Same day</span></div>
+      </div>
+    </div>
+
+    <div class="lcard">
+      <div class="lcard-head">
+        <div class="lcard-name">IIFL Finance <span class="pill pg">Digital</span></div>
+      </div>
+      <div class="lcard-body">
+        <div class="row"><span class="k">Interest Rate</span><span class="v">11% – 13%</span></div>
+        <div class="row"><span class="k">LTV</span><span class="v">Up to 50%</span></div>
+        <div class="row"><span class="k">Process</span><span class="v">Digital + demat</span></div>
+        <div class="row"><span class="k">Min Loan</span><span class="v">Rs. 50,000</span></div>
+        <div class="row"><span class="k">TAT</span><span class="v">T+1</span></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="warn-box">&#9888; <strong>Action needed:</strong> Add individual lender product sheets to <code>data/</code> so LISA can give precise, per-lender answers. Current data is from general RAG notes. Dedicated lender documents will significantly improve answer quality.</div>
+</div>
+
+<div class="divider"></div>
+
+<!-- PROCESS TYPES -->
+<div id="process-types" class="anchor">
+  <div class="section-header">
+    <div class="eyebrow">Operations</div>
+    <h2><span class="ico">&#128260;</span> Digital vs Phygital Loan Process</h2>
+  </div>
+
+  <div class="compare">
+    <div class="comp-card">
+      <div class="comp-head good">&#9889; Digital (BFL, Mirae, DSP)</div>
+      <div class="comp-body">
+        <ul>
+          <li>Client fills form online via partner platform</li>
+          <li>OTP-based KYC verification</li>
+          <li>CAMS/KFintech lien marking in real time</li>
+          <li>E-sign via Aadhaar OTP</li>
+          <li>NACH e-mandate setup online</li>
+          <li>Disbursement: same day to T+1</li>
+          <li><strong>TAT: ~3 minutes</strong></li>
+        </ul>
+      </div>
+    </div>
+    <div class="comp-card">
+      <div class="comp-head bad">&#128196; Phygital (ABFL, Tata Capital)</div>
+      <div class="comp-body">
+        <ul>
+          <li>Client submits physical/scanned documents</li>
+          <li>KYC at branch or via courier</li>
+          <li>Physical pledge forms signed and submitted</li>
+          <li>Lender manually verifies portfolio</li>
+          <li>Disbursement after manual approval</li>
+          <li>Used for large-ticket loans (Rs. 10 Cr+)</li>
+          <li><strong>TAT: 2-3 business days</strong></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="divider"></div>
+
+<!-- PAYOUTS -->
+<div id="payouts" class="anchor">
+  <div class="section-header">
+    <div class="eyebrow">Operations</div>
+    <h2><span class="ico">&#128176;</span> Partner Payout Structure</h2>
+    <p>MFD partners earn commission for loans processed through their Lark Edge setup. LISA answers payout questions from this structure.</p>
+  </div>
+
+  <div class="tbl-wrap">
+    <table>
+      <thead><tr><th>Payout Type</th><th>When Earned</th><th>Notes</th></tr></thead>
+      <tbody>
+        <tr><td>Upfront Payout</td><td>On loan disbursement</td><td>% of total loan amount: rate varies by lender agreement and partner tier</td></tr>
+        <tr><td>Trail Income</td><td>Monthly, while loan is active</td><td>% of outstanding loan balance: passive recurring income for partners</td></tr>
+        <tr><td>Processing Fee Share</td><td>On disbursement</td><td>Portion of the 0.5% processing fee charged to the borrower</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="warn-box">&#9888; Exact payout percentages are lender-specific and under NDA. Add a <code>Partner_Payout_Guide.txt</code> to <code>data/</code> for LISA to answer payout questions accurately.</div>
+</div>
+
+<div class="divider"></div>
+
+<!-- GRIEVANCE -->
+<div id="grievance" class="anchor">
+  <div class="section-header">
+    <div class="eyebrow">Operations</div>
+    <h2><span class="ico">&#128203;</span> Grievance Redressal &amp; Support</h2>
+    <p>LISA handles Tier 0 support. It must know when to answer directly and when to escalate to a human.</p>
+  </div>
+
+  <h3>Support Channels</h3>
+  <div class="tbl-wrap">
+    <table>
+      <thead><tr><th>Channel</th><th>Contact</th><th>SLA</th></tr></thead>
+      <tbody>
+        <tr><td>LISA (Tier 0)</td><td>Chat on portal</td><td>Instant: FAQs, process Q&amp;A, product info</td></tr>
+        <tr><td>Email Support</td><td>hello@larkfinserv.com</td><td>24-48 hour response</td></tr>
+        <tr><td>Grievance Portal</td><td>larkfinserv.com/grievance</td><td>48h acknowledgement · 7 days resolution</td></tr>
+        <tr><td>Level 1 Escalation</td><td>Partner Success Manager</td><td>4 business hours</td></tr>
+        <tr><td>Level 2 Escalation</td><td>Head of Operations</td><td>24h for unresolved Level 1</td></tr>
+        <tr><td>Regulatory</td><td>SEBI / RBI portal</td><td>Per regulatory timeline</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="card-row">
+    <div class="card">
+      <h4 style="color:#059669; margin-top:0">LISA CAN answer these</h4>
+      <ul>
+        <li>Loan disbursement TAT and expected timeline</li>
+        <li>Margin call explanation and top-up process</li>
+        <li>Interest rate and fee queries</li>
+        <li>Pledge release process after repayment</li>
+        <li>General product eligibility and process</li>
+        <li>WhatsApp/email content generation</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h4 style="color:#DC2626; margin-top:0">LISA MUST escalate these</h4>
+      <ul>
+        <li>Specific loan account balance or transaction</li>
+        <li>Client-specific interest calculations</li>
+        <li>KYC rejection reasons for specific clients</li>
+        <li>Fraud or unauthorized transaction complaints</li>
+        <li>Regulatory/legal disputes</li>
+        <li>Payout amount discrepancies</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<div class="divider"></div>
+
+<!-- COMPLIANCE -->
+<div id="compliance" class="anchor">
+  <div class="section-header">
+    <div class="eyebrow">Operations</div>
+    <h2><span class="ico">&#128737;</span> Compliance &amp; Regulatory</h2>
+  </div>
+
+  <div class="tbl-wrap">
+    <table>
+      <thead><tr><th>Area</th><th>Dev (Current)</th><th>Production (with AWS Bedrock)</th></tr></thead>
+      <tbody>
+        <tr><td>Data Storage</td><td>Local SQLite</td><td>AWS RDS PostgreSQL: encrypted at rest</td></tr>
+        <tr><td>Audit Logs</td><td>LangSmith</td><td>AWS CloudTrail: immutable audit trail</td></tr>
+        <tr><td>Compliance Certs</td><td>Manual</td><td>SOC2 Type II, ISO 27001 (via AWS)</td></tr>
+        <tr><td>RBI Guidelines</td><td>Manual review</td><td>AWS GovCloud / RBI-compliant region</td></tr>
+        <tr><td>Password Policy</td><td>Scrypt, no expiry</td><td>Add MFA + password expiry policy</td></tr>
+        <tr><td>Access Control</td><td>Role-based (partner_type)</td><td>Add IP whitelisting + SSO</td></tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<div class="divider"></div>
+
+<!-- ════════════════════════════════════════════
+     RAG DOCS
+════════════════════════════════════════════ -->
+<div id="rag-docs" class="anchor">
+  <div class="section-header">
+    <div class="eyebrow">Knowledge Base</div>
+    <h2><span class="ico">&#128196;</span> What Documents LISA Needs</h2>
+    <p>LISA's quality is 100% dependent on what's in <code>data/</code>. If a document doesn't exist, LISA cannot answer that question. This is the master checklist.</p>
+  </div>
+
+  <div class="highlight">&#128161; <strong>Rule:</strong> If it's not in <code>data/</code>, LISA will say "I don't have that information." Better documents = better LISA. Every missing doc is a gap in LISA's knowledge.</div>
+
+  <h3>Product Documents</h3>
+  <ul class="checklist">
+    <li><span class="ch-ok">&#10003;</span><div><strong>AI_B2C_RAG_Optimized.txt</strong>: LAMF/LAS product FAQ: rates, LTV, eligibility, process, fees, prepayment. <span class="pill pg">Exists</span></div></li>
+    <li><span class="ch-ok">&#10003;</span><div><strong>Lark_Finserv_Company_Information.txt</strong>: Company overview, mission, product line, team. <span class="pill pg">Exists</span></div></li>
+    <li><span class="ch-ok">&#10003;</span><div><strong>Promotion Material.txt</strong>: WhatsApp templates, pitch scripts, MFD marketing content. <span class="pill pg">Exists</span></div></li>
+    <li><span class="ch-miss">&#9679;</span><div><strong>Lark_Edge_Product_Sheet.txt</strong>: Feature list, setup guide, MFD use cases, pricing, go-live steps. <span class="pill po">Missing: add to data/</span></div></li>
+    <li><span class="ch-miss">&#9679;</span><div><strong>Lark_Vault_Product_Sheet.txt</strong>: White-label platform features, config options, onboarding. <span class="pill po">Missing</span></div></li>
+    <li><span class="ch-miss">&#9679;</span><div><strong>Lark_OS_Enterprise_Guide.txt</strong>: Enterprise LAS infrastructure, on-premise setup, SLAs. <span class="pill po">Missing</span></div></li>
+    <li><span class="ch-miss">&#9679;</span><div><strong>Lark_Grid_API_Overview.txt</strong>: SDK capabilities, REST endpoints, webhook events. <span class="pill po">Missing</span></div></li>
+  </ul>
+
+  <h3>Lender Documents</h3>
+  <ul class="checklist">
+    <li><span class="ch-ok">&#10003;</span><div><strong>ABFL Tata Offline LAS.txt</strong>: Phygital process for ABFL and Tata Capital, required docs, TAT. <span class="pill pg">Exists</span></div></li>
+    <li><span class="ch-miss">&#9679;</span><div><strong>BFL_Product_Sheet.txt</strong>: Bajaj Finance LAMF rates, LTV, digital process, contacts. <span class="pill po">Missing: high priority</span></div></li>
+    <li><span class="ch-miss">&#9679;</span><div><strong>DSP_Lender_Guide.txt</strong>: DSP Blackrock LAS terms, eligible funds, rates, lien process. <span class="pill po">Missing: high priority</span></div></li>
+    <li><span class="ch-miss">&#9679;</span><div><strong>Mirae_Asset_LAS.txt</strong>: Mirae rates, CAMS process, eligible fund list. <span class="pill po">Missing</span></div></li>
+    <li><span class="ch-miss">&#9679;</span><div><strong>Lender_Comparison_Matrix.txt</strong>: Side-by-side: rate, LTV, process, TAT, min amount. <span class="pill po">Missing: very high value</span></div></li>
+  </ul>
+
+  <h3>Operations Documents</h3>
+  <ul class="checklist">
+    <li><span class="ch-ok">&#10003;</span><div><strong>Lark_Finserv_RAG_Notes.txt</strong>: Internal operations notes and additional context. <span class="pill pg">Exists</span></div></li>
+    <li><span class="ch-miss">&#9679;</span><div><strong>Loan_Journey_Detailed.txt</strong>: Step-by-step from eligibility check to disbursement. Timings at each step. <span class="pill po">Missing</span></div></li>
+    <li><span class="ch-miss">&#9679;</span><div><strong>Partner_Payout_Guide.txt</strong>: Upfront payout %, trail income, processing fee share by lender. <span class="pill po">Missing</span></div></li>
+    <li><span class="ch-miss">&#9679;</span><div><strong>Grievance_SOP.txt</strong>: Issue types, escalation path, resolution SLAs, contacts. <span class="pill po">Missing</span></div></li>
+    <li><span class="ch-miss">&#9679;</span><div><strong>Margin_Call_Process.txt</strong>: When triggered, top-up options, repayment, lender-specific rules. <span class="pill po">Missing</span></div></li>
+    <li><span class="ch-miss">&#9679;</span><div><strong>Partner_Onboarding_Checklist.txt</strong>: Steps to onboard a new MFD/wealth platform partner. <span class="pill po">Missing</span></div></li>
+  </ul>
+
+  <h3>Training Data</h3>
+  <ul class="checklist">
+    <li><span class="ch-ok">&#10003;</span><div><strong>Complete_Training_Dataset_Labeled.csv</strong>: 503 labeled Q&amp;A pairs covering most common MFD questions. <span class="pill pg">Exists</span></div></li>
+    <li><span class="ch-miss">&#9679;</span><div><strong>FAQ_Extended.txt</strong>: Expand to 1000+ Q&amp;A pairs. Add lender-specific, payout, grievance questions. <span class="pill po">Expand</span></div></li>
+  </ul>
+</div>
+
+<div class="divider"></div>
+
+<!-- DOC FORMAT -->
+<div id="doc-format" class="anchor">
+  <div class="section-header">
+    <div class="eyebrow">Knowledge Base</div>
+    <h2><span class="ico">&#9999;</span> How to Write Documents for RAG</h2>
+    <p>Documents are split into 500-character chunks. Each chunk must be self-contained and include the key numbers explicitly.</p>
+  </div>
+
+  <div class="tbl-wrap">
+    <table>
+      <thead><tr><th>&#10003; Write this way</th><th>&#10060; Avoid this</th></tr></thead>
+      <tbody>
+        <tr><td>"LAMF interest rate starts at 10.5% per annum for equity funds."</td><td>"The rate is mentioned in the table below."</td></tr>
+        <tr><td>"Minimum portfolio value for LAMF: Rs. 50,000."</td><td>"See the product brochure for minimum values."</td></tr>
+        <tr><td>Use ===== and ----- section headers</td><td>Continuous prose with no headings</td></tr>
+        <tr><td>State numbers explicitly in every section</td><td>Cross-reference other sections (chunks can't see them)</td></tr>
+        <tr><td>Short paragraphs (3-5 sentences max)</td><td>1,000+ character paragraphs</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h3>Template for a lender document</h3>
+  <pre>============================
+BFL (Bajaj Finance): LAMF Product Details
+============================
+BFL (Bajaj Finance Limited) offers Loan Against Mutual Funds (LAMF)
+through the Lark Finserv platform.
+
+Interest rate: 10.5% to 11.5% per annum (floating rate, subject to change).
+Minimum loan amount: Rs. 25,000.
+Maximum loan amount: Based on LTV of pledged portfolio.
+LTV ratio: Up to 50% for equity mutual funds, up to 80% for debt funds.
+
+============================
+BFL LAMF Process
+============================
+The BFL LAMF process is fully digital. Steps:
+1. Portfolio eligibility check via CAMS/KFintech
+2. Digital KYC via CKYC lookup or Aadhaar OTP
+3. Lien marking on mutual fund units via CAMS
+4. E-sign via Aadhaar OTP
+5. NACH e-mandate registration
+6. Disbursement to registered bank account
+
+TAT: Same day disbursement (T+0) for complete digital applications.
+Processing fee: 0.5% of loan amount.
+
+============================
+BFL LAMF Eligibility
+============================
+Eligible fund categories: Equity funds, debt funds, hybrid funds, ETFs, index funds.
+Ineligible: ELSS funds (lock-in), closed-ended funds.
+Minimum portfolio value: Rs. 50,000.
+KYC: Must be Aadhaar/PAN linked.</pre>
+</div>
+
+<div class="divider"></div>
+
+<!-- ════════════════════════════════════════════
+     SETUP
+════════════════════════════════════════════ -->
+<div id="setup" class="anchor">
+  <div class="section-header">
+    <div class="eyebrow">Setup</div>
+    <h2><span class="ico">&#128736;</span> Fresh Setup: Step by Step</h2>
+    <p>Complete guide to running LISA from scratch on a new machine.</p>
+  </div>
+
+  <h3>Step 1: Clone and Install</h3>
+  <pre>git clone https://github.com/larkfinserv/LISA-RAG.git
+cd LISA-RAG
+pip install -r requirements.txt</pre>
+
+  <h3>Step 2: Create .env File</h3>
+  <pre># Create this file manually: never commit it to git
+OPENAI_API_KEY=sk-your-openai-key-here
+SECRET_KEY=generate-a-long-random-string-here
+
+# Database (SQLite for dev, change to PostgreSQL for production)
+DATABASE_URL=sqlite:///instance/lisa.db
+
+# Optional: LangSmith tracing (get free key at smith.langchain.com)
+LANGCHAIN_TRACING_V2=true
+LANGCHAIN_API_KEY=ls-your-langsmith-key
+LANGCHAIN_PROJECT=LISA-RAG</pre>
+
+  <h3>Step 3: Add Knowledge Documents</h3>
+  <pre># Drop .txt and .csv files into the data/ folder
+# Minimum required to start:
+data/
+  AI_B2C_RAG_Optimized.txt
+  Lark_Finserv_Company_Information.txt
+  Promotion Material.txt
+  ABFL Tata Offline LAS.txt
+  Lark_Finserv_RAG_Notes.txt
+  Complete_Training_Dataset_Labeled.csv
+# See "What Docs LISA Needs" section for full list</pre>
+
+  <h3>Step 4: Create Database Tables</h3>
+  <pre>python backend/scripts/create_db.py
+# → "Database tables created successfully!"
+# Creates instance/lisa.db with 4 tables</pre>
+
+  <h3>Step 5: Create Login Accounts</h3>
+  <pre>python backend/scripts/seed_users.py
+# Creates: admin/admin123 · demo_mfd/demo123 · demo_wealth/demo123</pre>
+
+  <h3>Step 6: Build the FAISS Index</h3>
+  <pre>python backend/scripts/ingest_documents.py
+# Loads all files from data/
+# Chunks, embeds via OpenAI, builds FAISS index
+# Saves: vectorstore/index.faiss + vectorstore/index.pkl
+# Time: ~2-5 minutes · Cost: ~$0.02 one-time · Re-run only when docs change</pre>
+
+  <h3>Step 7: Start LISA</h3>
+  <pre>KMP_DUPLICATE_LIB_OK=TRUE python app.py
+# → http://localhost:5001
+# Login: admin / admin123</pre>
+</div>
+
+<div class="divider"></div>
+
+<!-- ADD DOCS -->
+<div id="add-docs" class="anchor">
+  <div class="section-header">
+    <div class="eyebrow">Setup</div>
+    <h2><span class="ico">&#128196;</span> Adding New Knowledge to LISA</h2>
+  </div>
+
+  <div class="steps">
+    <div class="step">
+      <div class="snum">1</div>
+      <div class="sbody">
+        <div class="stitle">Write the document</div>
+        <div class="sdesc">Create a <code>.txt</code> file. Use ===== section headers. State all numbers explicitly in each section. Keep paragraphs short. See the format guide above.</div>
+      </div>
+    </div>
+    <div class="step">
+      <div class="snum">2</div>
+      <div class="sbody">
+        <div class="stitle">Add to data/ folder</div>
+        <div class="sdesc">Place the file in <code>data/</code>. Name it descriptively: <code>BFL_Product_Sheet.txt</code>, <code>Partner_Payout_Guide.txt</code>, etc.</div>
+      </div>
+    </div>
+    <div class="step">
+      <div class="snum">3</div>
+      <div class="sbody">
+        <div class="stitle">Re-run ingestion</div>
+        <div class="sdesc"><code>python backend/scripts/ingest_documents.py</code>: rebuilds the entire FAISS index with all documents including the new one. Takes 2-5 minutes.</div>
+      </div>
+    </div>
+    <div class="step">
+      <div class="snum">4</div>
+      <div class="sbody">
+        <div class="stitle">Restart the server</div>
+        <div class="sdesc">FAISS is loaded into memory at startup. Restart: <code>Ctrl+C</code> then <code>python app.py</code>. LISA now knows the new document immediately.</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="divider"></div>
+
+<!-- PRODUCTION -->
+<div id="production" class="anchor">
+  <div class="section-header">
+    <div class="eyebrow">Setup</div>
+    <h2><span class="ico">&#128640;</span> Production Deployment</h2>
+  </div>
+
+  <div class="tbl-wrap">
+    <table>
+      <thead><tr><th>Component</th><th>Dev (Now)</th><th>Production</th></tr></thead>
+      <tbody>
+        <tr><td>Database</td><td>SQLite</td><td>Change DATABASE_URL in .env to PostgreSQL</td></tr>
+        <tr><td>Vector Store</td><td>Local FAISS files</td><td>AWS Bedrock Knowledge Base (S3 + managed)</td></tr>
+        <tr><td>Server</td><td>Flask dev server</td><td><code>gunicorn app:app -w 4</code> behind Nginx</td></tr>
+        <tr><td>HTTPS</td><td>None</td><td>Let's Encrypt cert via Certbot + Nginx</td></tr>
+        <tr><td>Secrets</td><td>.env file</td><td>AWS Secrets Manager or ECS env variables</td></tr>
+        <tr><td>Monitoring</td><td>LangSmith</td><td>LangSmith + AWS CloudWatch</td></tr>
+        <tr><td>Auth</td><td>Username/password</td><td>Add MFA, Google SSO via Flask-Dance</td></tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<div class="divider"></div>
+
+<!-- TROUBLESHOOT -->
+<div id="troubleshoot" class="anchor">
+  <div class="section-header">
+    <div class="eyebrow">Setup</div>
+    <h2><span class="ico">&#128296;</span> Troubleshooting</h2>
+  </div>
+
+  <div class="tbl-wrap">
+    <table>
+      <thead><tr><th>Issue</th><th>Cause</th><th>Fix</th></tr></thead>
+      <tbody>
+        <tr><td>Invalid username/password</td><td>DB created but seed not run</td><td><code>python backend/scripts/seed_users.py</code></td></tr>
+        <tr><td>FAISS index not found</td><td>Ingestion never run or vectorstore/ deleted</td><td><code>python backend/scripts/ingest_documents.py</code></td></tr>
+        <tr><td>KMP duplicate lib warning</td><td>macOS Intel MKL conflict</td><td>Prefix with <code>KMP_DUPLICATE_LIB_OK=TRUE</code></td></tr>
+        <tr><td>OpenAI 401 error</td><td>Wrong or expired API key</td><td>Check OPENAI_API_KEY in .env</td></tr>
+        <tr><td>LISA gives vague answers</td><td>Missing documents in data/</td><td>Add relevant .txt docs, re-run ingestion</td></tr>
+        <tr><td>Feedback not saving</td><td>message_id not returned from API</td><td>Check /api/chat response for message_id field</td></tr>
+        <tr><td>LISA says wrong rate</td><td>Outdated info in data/ file</td><td>Update the doc, re-run ingestion, restart server</td></tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<div class="divider"></div>
+
+<!-- ROADMAP -->
+<div id="roadmap" class="anchor">
+  <div class="section-header">
+    <div class="eyebrow">Setup</div>
+    <h2><span class="ico">&#128200;</span> Roadmap</h2>
+  </div>
+
+  <div class="tbl-wrap">
+    <table>
+      <thead><tr><th>Priority</th><th>Feature</th><th>Technical Notes</th></tr></thead>
+      <tbody>
+        <tr><td><span class="p-h">High</span></td><td>AWS Bedrock Migration</td><td>Swap retriever.py + ingest.py only. ~2 weeks. S3 for docs, managed knowledge base.</td></tr>
+        <tr><td><span class="p-h">High</span></td><td>WhatsApp Integration</td><td>Twilio or Meta Cloud API. Webhook in Flask. Session per phone number.</td></tr>
+        <tr><td><span class="p-m">Medium</span></td><td>Hybrid Search (BM25 + FAISS)</td><td>Add BM25 keyword index. Combine with FAISS scores via Reciprocal Rank Fusion.</td></tr>
+        <tr><td><span class="p-m">Medium</span></td><td>PDF Ingestion</td><td>Add pdfplumber loader to ingest.py. Handle multi-page PDFs with chunking.</td></tr>
+        <tr><td><span class="p-m">Medium</span></td><td>Partner Document Upload</td><td>File upload endpoint. Re-ingest on upload. Scope FAISS by partner_id.</td></tr>
+        <tr><td><span class="p-l">Low</span></td><td>Streaming Responses</td><td>Flask SSE or WebSocket. LangChain streaming callback for real-time typing effect.</td></tr>
+        <tr><td><span class="p-l">Low</span></td><td>Multi-language (Hindi/Marathi)</td><td>Translate query to English → embed → retrieve → respond → translate back.</td></tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+</div><!-- /content -->
+
+<div class="footer">
+  <div class="footer-logo">LISA</div>
+  <div style="margin-bottom:6px;">Powered by <strong>Lark Finserv</strong></div>
+  <div>AI Platform Documentation &nbsp;&nbsp; Internal Use Only &nbsp;&nbsp; 2026</div>
+</div>
+
+</div><!-- /main -->
+
+<script>
+// Scroll progress bar
+window.addEventListener('scroll', () => {
+  const el = document.documentElement;
+  const pct = el.scrollTop / (el.scrollHeight - el.clientHeight);
+  document.getElementById('progress').style.transform = `scaleX(${pct})`;
+});
+
+// Active nav link on scroll
+const sections = document.querySelectorAll('.anchor');
+const links = document.querySelectorAll('.nav-link');
+
+function getActiveId() {
+  let active = sections[0]?.id;
+  sections.forEach(s => {
+    if (window.scrollY + 80 >= s.offsetTop) active = s.id;
+  });
+  return active;
+}
+
+window.addEventListener('scroll', () => {
+  const id = getActiveId();
+  links.forEach(l => l.classList.remove('active'));
+  const match = [...links].find(l => l.getAttribute('onclick')?.includes("'" + id + "'"));
+  if (match) match.classList.add('active');
+}, { passive: true });
+
+function goto(id) {
+  const el = document.getElementById(id);
+  if (el) {
+    const y = el.getBoundingClientRect().top + window.scrollY - 32;
+    window.scrollTo({ top: y, behavior: 'smooth' });
+  }
+}
+
+function toggleSidebar() {
+  const hidden = document.body.classList.toggle('sidebar-hidden');
+  const btn = document.getElementById('toggleBtn');
+  btn.innerHTML = hidden ? '&#9776;' : '&#10005;';
+  btn.style.left = hidden ? '16px' : 'calc(var(--sidebar-w) - 16px)';
+}
+
+// Scroll reveal with IntersectionObserver
+const revealEls = document.querySelectorAll('.reveal, .reveal-group');
+const revealObs = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      e.target.classList.add('visible');
+      revealObs.unobserve(e.target);
+    }
+  });
+}, { threshold: 0.08 });
+revealEls.forEach(el => revealObs.observe(el));
+
+// Add reveal class to all section content dynamically
+document.querySelectorAll('.anchor').forEach((sec, i) => {
+  // section-header
+  const sh = sec.querySelector('.section-header');
+  if (sh) sh.classList.add('reveal');
+
+  // card-row and card-row-3 get stagger
+  sec.querySelectorAll('.card-row, .card-row-3, .card-row-4').forEach(row => {
+    row.classList.add('reveal-group');
+    revealObs.observe(row);
+  });
+
+  // individual cards, tables, code blocks, steps, flows, checklists
+  sec.querySelectorAll('.card, .tbl-wrap, pre, .steps, .flow, .compare, .lender-grid, .stats, .highlight, .warn-box').forEach(el => {
+    if (!el.closest('.reveal-group')) {
+      el.classList.add('reveal');
+      revealObs.observe(el);
+    }
+  });
+
+  if (sh) revealObs.observe(sh);
+});
+</script>
+</body>
+</html>
