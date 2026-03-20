@@ -31,30 +31,47 @@ _reranker = None
 _init_lock = threading.Lock()
 
 
+def _create_llm(temperature: float):
+    """Create an LLM instance based on configured provider."""
+    from config.config import Config
+    provider = Config.LLM_PROVIDER.lower()
+
+    if provider == "bedrock":
+        from langchain_aws import ChatBedrock
+        return ChatBedrock(
+            model_id=Config.BEDROCK_LLM_MODEL,
+            region_name=Config.AWS_REGION,
+            model_kwargs={"temperature": temperature},
+        )
+    elif provider == "openai" and Config.OPENAI_API_KEY:
+        from langchain_openai import ChatOpenAI
+        return ChatOpenAI(
+            model=Config.LLM_MODEL,
+            temperature=temperature,
+            api_key=Config.OPENAI_API_KEY,
+        )
+    elif provider == "gemini" and Config.GEMINI_API_KEY:
+        from langchain_google_genai import ChatGoogleGenerativeAI
+        return ChatGoogleGenerativeAI(
+            model=Config.GEMINI_MODEL,
+            temperature=temperature,
+            google_api_key=Config.GEMINI_API_KEY,
+            convert_system_message_to_human=True,
+        )
+    else:
+        raise RuntimeError(
+            f"LLM provider '{provider}' not configured. "
+            "Set LLM_PROVIDER and the corresponding credentials in .env"
+        )
+
+
 def _get_llm():
     """Lazy-load the LLM (thread-safe)."""
     global _llm
     if _llm is None:
         with _init_lock:
             if _llm is None:
-                from config.config import Config
-                if Config.OPENAI_API_KEY:
-                    from langchain_openai import ChatOpenAI
-                    _llm = ChatOpenAI(
-                        model=Config.LLM_MODEL,
-                        temperature=0.3,
-                        api_key=Config.OPENAI_API_KEY,
-                    )
-                elif Config.GEMINI_API_KEY:
-                    from langchain_google_genai import ChatGoogleGenerativeAI
-                    _llm = ChatGoogleGenerativeAI(
-                        model=Config.GEMINI_MODEL,
-                        temperature=0.3,
-                        google_api_key=Config.GEMINI_API_KEY,
-                        convert_system_message_to_human=True,
-                    )
-                else:
-                    raise RuntimeError("No LLM API key configured. Set OPENAI_API_KEY or GEMINI_API_KEY in .env")
+                _llm = _create_llm(temperature=0.3)
     return _llm
 
 
@@ -64,24 +81,7 @@ def _get_creative_llm():
     if _creative_llm is None:
         with _init_lock:
             if _creative_llm is None:
-                from config.config import Config
-                if Config.OPENAI_API_KEY:
-                    from langchain_openai import ChatOpenAI
-                    _creative_llm = ChatOpenAI(
-                        model=Config.LLM_MODEL,
-                        temperature=0.85,
-                        api_key=Config.OPENAI_API_KEY,
-                    )
-                elif Config.GEMINI_API_KEY:
-                    from langchain_google_genai import ChatGoogleGenerativeAI
-                    _creative_llm = ChatGoogleGenerativeAI(
-                        model=Config.GEMINI_MODEL,
-                        temperature=0.85,
-                        google_api_key=Config.GEMINI_API_KEY,
-                        convert_system_message_to_human=True,
-                    )
-                else:
-                    raise RuntimeError("No LLM API key configured.")
+                _creative_llm = _create_llm(temperature=0.85)
     return _creative_llm
 
 

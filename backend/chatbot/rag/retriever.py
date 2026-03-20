@@ -19,18 +19,28 @@ class HybridRetriever:
         from langchain_community.vectorstores import FAISS
         from config.config import Config
 
-        # Use OpenAI embeddings if available, otherwise Gemini
-        if Config.OPENAI_API_KEY:
+        # Select embeddings based on provider
+        provider = Config.LLM_PROVIDER.lower()
+        if provider == "bedrock":
+            from langchain_aws import BedrockEmbeddings
+            self.embeddings = BedrockEmbeddings(
+                model_id=Config.BEDROCK_EMBEDDING_MODEL,
+                region_name=Config.AWS_REGION,
+            )
+        elif provider == "openai" and Config.OPENAI_API_KEY:
             from langchain_openai import OpenAIEmbeddings
             self.embeddings = OpenAIEmbeddings(model=embedding_model)
-        elif Config.GEMINI_API_KEY:
+        elif provider == "gemini" and Config.GEMINI_API_KEY:
             from langchain_google_genai import GoogleGenerativeAIEmbeddings
             self.embeddings = GoogleGenerativeAIEmbeddings(
                 model="models/gemini-embedding-001",
                 google_api_key=Config.GEMINI_API_KEY,
             )
         else:
-            raise RuntimeError("No API key for embeddings. Set OPENAI_API_KEY or GEMINI_API_KEY.")
+            raise RuntimeError(
+                f"Embeddings provider '{provider}' not configured. "
+                "Set LLM_PROVIDER and the corresponding credentials in .env"
+            )
 
         vs_path = Path(vectorstore_path)
         if not (vs_path / "index.faiss").exists():

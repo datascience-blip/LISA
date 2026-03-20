@@ -116,21 +116,33 @@ def chunk_documents(
 
 
 def _get_embeddings(embedding_model: str, openai_api_key: str = "", gemini_api_key: str = ""):
-    """Get embeddings model - OpenAI preferred, Gemini as fallback."""
-    if openai_api_key:
+    """Get embeddings model based on LLM_PROVIDER config. Falls back to explicit keys."""
+    from config.config import Config
+    provider = Config.LLM_PROVIDER.lower()
+
+    if provider == "bedrock":
+        from langchain_aws import BedrockEmbeddings
+        logger.info(f"Using Bedrock embeddings: {Config.BEDROCK_EMBEDDING_MODEL}")
+        return BedrockEmbeddings(
+            model_id=Config.BEDROCK_EMBEDDING_MODEL,
+            region_name=Config.AWS_REGION,
+        )
+    elif openai_api_key or (provider == "openai" and Config.OPENAI_API_KEY):
         from langchain_openai import OpenAIEmbeddings
+        key = openai_api_key or Config.OPENAI_API_KEY
         logger.info(f"Using OpenAI embeddings: {embedding_model}")
-        return OpenAIEmbeddings(model=embedding_model, api_key=openai_api_key)
-    elif gemini_api_key:
+        return OpenAIEmbeddings(model=embedding_model, api_key=key)
+    elif gemini_api_key or (provider == "gemini" and Config.GEMINI_API_KEY):
         from langchain_google_genai import GoogleGenerativeAIEmbeddings
+        key = gemini_api_key or Config.GEMINI_API_KEY
         gemini_model = "models/gemini-embedding-001"
         logger.info(f"Using Gemini embeddings: {gemini_model}")
         return GoogleGenerativeAIEmbeddings(
             model=gemini_model,
-            google_api_key=gemini_api_key,
+            google_api_key=key,
         )
     else:
-        raise RuntimeError("No API key for embeddings. Set OPENAI_API_KEY or GEMINI_API_KEY in .env")
+        raise RuntimeError("No embeddings provider configured. Set LLM_PROVIDER in .env")
 
 
 def build_faiss_index(

@@ -13,7 +13,15 @@ BASE_DIR = Path(__file__).parent.parent  # project root
 
 
 class Config:
-    # --- OpenAI ---
+    # --- LLM Provider: "bedrock", "openai", or "gemini" ---
+    LLM_PROVIDER = os.getenv("LLM_PROVIDER", "bedrock")
+
+    # --- AWS Bedrock ---
+    AWS_REGION = os.getenv("AWS_REGION", "us-east-1")
+    BEDROCK_LLM_MODEL = os.getenv("BEDROCK_LLM_MODEL", "anthropic.claude-sonnet-4-6-20250514")
+    BEDROCK_EMBEDDING_MODEL = os.getenv("BEDROCK_EMBEDDING_MODEL", "amazon.titan-embed-text-v2:0")
+
+    # --- OpenAI (fallback) ---
     OPENAI_API_KEY = os.getenv("OPENAI_API_KEY", "")
     EMBEDDING_MODEL = os.getenv("EMBEDDING_MODEL", "text-embedding-3-large")
     LLM_MODEL = os.getenv("LLM_MODEL", "gpt-4o-mini")
